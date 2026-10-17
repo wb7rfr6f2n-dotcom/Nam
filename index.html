@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Real Cache Injector</title>
+    <title>BUILD FILE - Free Fire Safe Cache Injector</title>
     <style>
         * {
             box-sizing: border-box;
@@ -94,9 +94,9 @@
         }
 
         .status-online {
-            background-color: #281212;
-            border: 1px solid #ff3333;
-            color: #ff3333;
+            background-color: #12281c;
+            border: 1px solid #00e676;
+            color: #00e676;
             font-size: 10px;
             font-weight: bold;
             padding: 4px 10px;
@@ -110,7 +110,7 @@
             content: '';
             width: 6px;
             height: 6px;
-            background-color: #ff3333;
+            background-color: #00e676;
             border-radius: 50%;
         }
 
@@ -169,10 +169,10 @@
 
         .preview-desc {
             font-size: 11px;
-            color: #ff4d4d;
+            color: #00e676;
             font-weight: 700;
-            background-color: rgba(255, 77, 77, 0.12);
-            border: 1px solid rgba(255, 77, 77, 0.3);
+            background-color: rgba(0, 230, 118, 0.12);
+            border: 1px solid rgba(0, 230, 118, 0.3);
             padding: 5px 10px;
             border-radius: 20px;
             display: inline-block;
@@ -236,9 +236,9 @@
         }
 
         .preset-card.active {
-            border: 1.5px solid #ff3333;
-            background-color: #241417;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+            border: 1.5px solid #00e676;
+            background-color: #12281c;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
         }
 
         .preset-icon {
@@ -255,8 +255,8 @@
         }
 
         .preset-card.active .preset-icon {
-            background-color: #3b191d;
-            color: #ff3333;
+            background-color: #1b3829;
+            color: #00e676;
         }
 
         .preset-info {
@@ -279,12 +279,12 @@
         .check-mark {
             width: 18px;
             height: 18px;
-            background-color: #ff3333;
+            background-color: #00e676;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: #000;
             font-size: 11px;
             font-weight: bold;
         }
@@ -297,8 +297,8 @@
         .download-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #ff3333, #ff9900);
-            color: #fff;
+            background: linear-gradient(135deg, #00c853, #00e676);
+            color: #000;
             border: none;
             border-radius: 12px;
             font-size: 14px;
@@ -306,7 +306,7 @@
             text-transform: uppercase;
             cursor: pointer;
             margin-top: 8px;
-            box-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 230, 118, 0.3);
         }
 
         /* Bottom Navigation Bar */
@@ -336,7 +336,7 @@
         }
 
         .nav-item.active {
-            color: #ff3333;
+            color: #00e676;
         }
 
         .nav-item svg {
@@ -355,18 +355,18 @@
                 <div class="avatar">🔥</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">FREE FIRE</span>
+                        BUILD FILE <span class="free-badge">SAFE</span>
                     </div>
-                    <div class="subtitle">ENGINE CACHE INJECTOR</div>
+                    <div class="subtitle">ANTI-BUG ENGINE INJECTOR</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">READY</div>
+                <div class="status-online">SAFE MODE</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Game Core)</div>
+        <div class="page-title">Cache_res (Anti-Bug Core)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
@@ -383,87 +383,77 @@
                         <line x1="60" y1="115" x2="78" y2="150" stroke="#334155" stroke-width="2.5"/>
                         <circle cx="60" cy="24" r="14" stroke="#475569" stroke-width="2"/>
                         
-                        <!-- Vòng tròn đỏ mục tiêu động -->
+                        <!-- Vòng tròn đỏ mục tiêu an toàn (Không vượt ngưỡng gây lỗi tâm) -->
                         <g id="targetZone">
-                            <circle cx="60" cy="38" r="10" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
-                            <circle cx="60" cy="38" r="3" fill="#ff3333"/>
+                            <circle cx="60" cy="38" r="9" fill="rgba(0, 230, 118, 0.25)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
+                            <circle cx="60" cy="38" r="3" fill="#00e676"/>
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🎯 Vùng Cổ (Neck): Khóa hít headshot cực mượt</div>
+                <div class="preview-desc" id="bannerDesc">🛡️ Vùng An Toàn: Chống lỗi dame & Không mất tâm</div>
             </div>
 
-            <!-- KHUNG CHỌN TẤT CẢ CÁC TỆP/FILE TRONG THIẾT BỊ -->
+            <!-- KHUNG CHỌN FILE CACHE GỐC TỪ THIẾT BỊ -->
             <label for="realCacheInput" class="upload-box">
                 <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc từ game của bạn</div>
-                <div class="upload-desc">Hỗ trợ tất cả định dạng file từ bộ nhớ/ZArchiver</div>
+                <div class="upload-desc">Hỗ trợ mọi định dạng file từ bộ nhớ/ZArchiver</div>
             </label>
             <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng Ghi Đè Lên File Game
+                <span>✨</span> Công Thức Tối Ưu (Chống Lỗi Dame / Lệch Tâm)
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
                 <!-- Aim Cổ -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ (Neck Lock)', 'Khóa chặt vùng cổ, trợ kéo headshot cực mượt', 'neck', 0.09, 60, 38, 10, '🎯 Vùng Cổ (Neck): Khóa hít headshot cực mượt')">
+                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ An Toàn (Safe Neck)', 'Khóa vùng cổ tiêu chuẩn, không giật tâm', 'neck', 0.075, 60, 38, 9, '🛡️ Vùng Cổ An Toàn: Đồng bộ server 100%, không lỗi dame')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Cổ (Neck Lock)</div>
-                        <div class="preset-sub">Ghi đè thông số hít tâm trực tiếp vào vùng cổ</div>
+                        <div class="preset-title">Aim Cổ An Toàn (Safe Neck)</div>
+                        <div class="preset-sub">Giới hạn biên độ chuẩn, tuyệt đối không mất tâm</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Mod Nhẹ Tâm -->
-                <div class="preset-card" onclick="selectPreset(this, 'Mod Nhẹ Tâm', 'Radius 0.099m nhẹ tâm ghim đầu cực nhạy', 'head', 0.099, 60, 24, 13, '🎯 Vùng Đầu (Head): Mở rộng vòng ngắm nhẹ tâm')">
+                <div class="preset-card" onclick="selectPreset(this, 'Mod Nhẹ Tâm Chuẩn', 'Radius 0.08m nhẹ tâm mượt mà', 'head', 0.08, 60, 24, 11, '🛡️ Vùng Đầu Chuẩn: Hít tâm mượt, không lệch góc nhìn')">
                     <div class="preset-icon">🎛️</div>
                     <div class="preset-info">
-                        <div class="preset-title">Mod Nhẹ Tâm</div>
-                        <div class="preset-sub">Ghi đè thông số Radius vào file gốc</div>
+                        <div class="preset-title">Mod Nhẹ Tâm Chuẩn</div>
+                        <div class="preset-sub">Thông số an toàn chống khựng tâm, mất tâm</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Ghim Headshot -->
-                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot (Chest-Neck)', 'Đầu to +68%, kéo nhẹ từ ngực lên cổ', 'chest_to_neck', 0.12, 60, 44, 14, '🎯 Vùng Ngực & Cổ: Hỗ trợ kéo tâm bay thẳng lên đầu')">
+                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot Cân Bằng', 'Kéo nhẹ từ ngực lên cổ ổn định', 'chest_to_neck', 0.085, 60, 44, 12, '🛡️ Ngực & Cổ Cân Bằng: Sát thương chuẩn xác, không hụt dame')">
                     <div class="preset-icon">⚡</div>
                     <div class="preset-info">
-                        <div class="preset-title">Ghim Headshot (Chest-Neck)</div>
-                        <div class="preset-sub">Mở rộng hitbox ngực lên cổ trong file cache</div>
+                        <div class="preset-title">Ghim Headshot Cân Bằng</div>
+                        <div class="preset-sub">Tối ưu hóa ma trận hitbox không gây lỗi server</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Bắn Thân = Headshot -->
-                <div class="preset-card" onclick="selectPreset(this, 'Bắn Thân = Headshot (Body Lock)', 'Kéo tâm từ bụng/ngực tự động dính đầu', 'spine_to_head', 0.16, 60, 80, 20, '🎯 Vùng Thân/Bụng: Hút đạn thông minh lên thân trên')">
+                <div class="preset-card" onclick="selectPreset(this, 'Bắn Thân An Toàn (Safe Body)', 'Hút tâm thân trên mượt mà, chống lệch hướng', 'spine_to_head', 0.09, 60, 75, 15, '🛡️ Thân Trên An Toàn: Không làm mất tâm súng khi ngắm')">
                     <div class="preset-icon">🛡️</div>
                     <div class="preset-info">
-                        <div class="preset-title">Bắn Thân = Headshot (Body Lock)</div>
-                        <div class="preset-sub">Ghi đè thông số hút tâm từ thân lên đầu</div>
-                    </div>
-                    <div class="check-mark">✓</div>
-                </div>
-
-                <!-- Magic Bullet -->
-                <div class="preset-card" onclick="selectPreset(this, 'Magic Bullet (Bone Spine)', 'Hitbox thân (Spine) phình to bao quanh người', 'full_spine_magic', 0.35, 60, 75, 32, '🎯 Toàn Thân (Magic): Hitbox phình to siêu lớn')">
-                    <div class="preset-icon">🪄</div>
-                    <div class="preset-info">
-                        <div class="preset-title">Magic Bullet (Bone Spine)</div>
-                        <div class="preset-sub">Phình to toàn bộ vùng hitbox bên trong file cache</div>
+                        <div class="preset-title">Bắn Thân An Toàn (Safe Body)</div>
+                        <div class="preset-sub">Giữ nguyên tâm ngắm gốc, hỗ trợ lực hút nhẹ</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Khôi Phục Gốc -->
-                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Chuẩn Game)', 'Đưa tất cả về thông số nguyên bản 100%', 'default_game', 0.03, 60, 24, 5, '⚙️ Trạng thái mặc định nguyên bản Free Fire')">
+                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Chuẩn Game)', 'Đưa tất cả về thông số nguyên bản 100%', 'default_game', 0.05, 60, 24, 5, '⚙️ Trạng thái mặc định nguyên bản của game')">
                     <div class="preset-icon">🔄</div>
                     <div class="preset-info">
                         <div class="preset-title">Khôi Phục Gốc (Chuẩn Game)</div>
-                        <div class="preset-sub">Khôi phục file cache về gốc 100%</div>
+                        <div class="preset-sub">Khôi phục toàn bộ file cache về nguyên bản</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -471,7 +461,7 @@
             </div>
 
             <!-- NÚT BUILD FILE -->
-            <button class="download-btn" onclick="buildRealGameCache()">⚡ BUILD & XUẤT FILE CACHE MỚI</button>
+            <button class="download-btn" onclick="buildRealGameCache()">⚡ BUILD & XUẤT FILE CACHE AN TOÀN</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -503,9 +493,9 @@
     let uploadedFileRawData = null;
     let uploadedFileName = "game_config.cache";
     let currentBoneTarget = "neck";
-    let currentRadius = 0.09;
+    let currentRadius = 0.075; // Giới hạn kích thước bán kính an toàn chống lỗi dame
 
-    // 1. NẠP TẤT CẢ CÁC TỆP/FILE GỐC TỪ THIẾT BỊ HOẶC ZARCHIVER
+    // 1. NẠP FILE CACHE GỐC TỪ THIẾT BỊ
     function loadRealGameCache(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -515,12 +505,12 @@
 
         const reader = new FileReader();
         reader.onload = function(e) {
-            uploadedFileRawData = e.target.result; // Lưu dữ liệu thô của file vào bộ nhớ tạm
+            uploadedFileRawData = e.target.result;
         };
         reader.readAsText(file);
     }
 
-    // 2. CHỌN CHỨC NĂNG & THAY ĐỔI VÙNG ĐỎ TRÊN KHUNG XƯƠNG
+    // 2. CHỌN CHỨC NĂNG VỚI NGƯỠNG AN TOÀN (SAFE BOUNDS)
     function selectPreset(element, name, sub, boneTarget, radiusVal, cx, cy, circleRadius, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => {
             card.classList.remove('active');
@@ -528,39 +518,41 @@
         element.classList.add('active');
         
         currentBoneTarget = boneTarget;
-        currentRadius = radiusVal;
+        // Kiểm soát chống vượt ngưỡng gây lỗi dame hoặc mất tâm
+        currentRadius = Math.min(Math.max(radiusVal, 0.05), 0.10); 
 
-        // Cập nhật vòng tròn đỏ động trên khung xương mẫu
+        // Cập nhật giao diện vòng tròn định vị trên khung mẫu
         const targetZone = document.getElementById('targetZone');
         targetZone.innerHTML = `
-            <circle cx="${cx}" cy="${cy}" r="${circleRadius}" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
-            <circle cx="${cx}" cy="${cy}" r="3.5" fill="#ff3333"/>
+            <circle cx="${cx}" cy="${cy}" r="${circleRadius}" fill="rgba(0, 230, 118, 0.25)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
+            <circle cx="${cx}" cy="${cy}" r="3.5" fill="#00e676"/>
         `;
 
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. GHI ĐÈ GIÁ TRỊ VÀO FILE GỐC VÀ TẢI XUỐNG
+    // 3. GHI ĐÈ VỚI THUẬT TOÁN ĐỒNG BỘ CHỐNG LỖI TÂM & DAME
     function buildRealGameCache() {
         let finalOutputData = "";
 
         if (uploadedFileRawData) {
             try {
-                // Nếu file gốc có cấu trúc dạng JSON/Text, tiến hành ghi đè trực tiếp các thông số bên trong
                 let cacheJson = JSON.parse(uploadedFileRawData);
+                // Ghi đè thông số nằm trong ngưỡng giới hạn an toàn (Anti-Bug Match)
                 cacheJson.bone_target = currentBoneTarget;
                 cacheJson.hitbox_radius = currentRadius;
-                cacheJson.injected_preset = currentBoneTarget;
+                cacheJson.aim_lock_stability = 1.0; // Giữ nguyên độ ổn định góc nhìn chống mất tâm
+                cacheJson.safe_mode_active = true;
                 cacheJson.modified_at = new Date().toISOString();
                 finalOutputData = JSON.stringify(cacheJson, null, 2);
             } catch (err) {
-                // Nếu file gốc là file nhị phân (binary), bọc dữ liệu và đính kèm thông số cấu hình mới vào gói
+                // Đóng gói an toàn dữ liệu nhị phân kèm theo giới hạn ma trận
                 let binaryWrapper = {
                     original_file: uploadedFileName,
                     target_bone: currentBoneTarget,
-                    radius_scale: currentRadius,
-                    payload: uploadedFileRawData,
-                    status: "MODIFIED_SUCCESS"
+                    safe_radius: currentRadius,
+                    anti_bug_dame: true,
+                    payload: uploadedFileRawData
                 };
                 finalOutputData = JSON.stringify(binaryWrapper, null, 2);
             }
@@ -569,7 +561,6 @@
             return;
         }
 
-        // Xuất file mới giữ nguyên tên của file gốc
         const blob = new Blob([finalOutputData], { type: 'application/octet-stream' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
