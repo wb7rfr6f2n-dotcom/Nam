@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Studio Build Engine (Interactive Preview)</title>
+    <title>BUILD FILE - Free Fire Cache Engine</title>
     <style>
         * {
             box-sizing: border-box;
@@ -22,7 +22,6 @@
             min-height: 100vh;
         }
 
-        /* Khung màn hình Mobile Mockup */
         .app-container {
             width: 100%;
             max-width: 414px;
@@ -36,7 +35,7 @@
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
         }
 
-        /* Header top bar */
+        /* Header */
         .header {
             padding: 15px 20px;
             display: flex;
@@ -56,7 +55,7 @@
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #00b0ff, #00e676);
+            background: linear-gradient(135deg, #ff3333, #ff9900);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -73,7 +72,7 @@
         }
 
         .free-badge {
-            background-color: #0088ff;
+            background-color: #ff3333;
             color: #fff;
             font-size: 9px;
             padding: 2px 6px;
@@ -95,9 +94,9 @@
         }
 
         .status-online {
-            background-color: #122820;
-            border: 1px solid #00e676;
-            color: #00e676;
+            background-color: #281212;
+            border: 1px solid #ff3333;
+            color: #ff3333;
             font-size: 10px;
             font-weight: bold;
             padding: 4px 10px;
@@ -111,7 +110,7 @@
             content: '';
             width: 6px;
             height: 6px;
-            background-color: #00e676;
+            background-color: #ff3333;
             border-radius: 50%;
         }
 
@@ -121,24 +120,23 @@
             border-radius: 8px;
             font-size: 11px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .page-title {
             text-align: center;
             font-size: 18px;
             font-weight: 700;
-            padding: 12px 0 8px 0;
+            padding: 10px 0;
             color: #ffffff;
+            background: #111622;
+            border-bottom: 1px solid #1e2736;
         }
 
         /* Nội dung cuộn chính */
         .content-scroll {
             flex: 1;
             overflow-y: auto;
-            padding: 10px 16px 85px 16px;
+            padding: 12px 16px 85px 16px;
             scrollbar-width: none;
         }
         .content-scroll::-webkit-scrollbar {
@@ -147,21 +145,21 @@
 
         /* Banner khung xương tương tác động */
         .preview-banner {
-            background: radial-gradient(circle at center, #1a2333 0%, #101520 100%);
-            border: 1px solid #1e293b;
+            background: radial-gradient(circle at center, #1a1622 0%, #10121a 100%);
+            border: 1px solid #2a1f2e;
             border-radius: 16px;
-            padding: 15px;
+            padding: 12px;
             text-align: center;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
             position: relative;
         }
 
         .preview-image {
-            height: 130px;
+            height: 110px;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             position: relative;
         }
 
@@ -171,21 +169,52 @@
 
         .preview-desc {
             font-size: 11px;
-            color: #ff3333;
+            color: #ff4d4d;
             font-weight: 700;
-            background-color: rgba(255, 51, 51, 0.1);
-            border: 1px solid rgba(255, 51, 51, 0.3);
-            padding: 5px 12px;
+            background-color: rgba(255, 77, 77, 0.12);
+            border: 1px solid rgba(255, 77, 77, 0.3);
+            padding: 5px 10px;
             border-radius: 20px;
             display: inline-block;
         }
 
+        /* Khung xem trước thông số file gốc Free Fire đang được thay đổi */
+        .file-status-box {
+            background-color: #121824;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 14px;
+            font-size: 11px;
+        }
+
+        .file-status-title {
+            color: #00e676;
+            font-weight: bold;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .code-preview {
+            color: #94a3b8;
+            font-family: monospace;
+            font-size: 10px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            background: #090d14;
+            padding: 6px;
+            border-radius: 6px;
+            max-height: 55px;
+            overflow-y: auto;
+        }
+
         /* Danh sách Công Thức */
         .section-header {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #e2e8f0;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -195,7 +224,7 @@
             background-color: #141a24;
             border: 1px solid #1e2736;
             border-radius: 12px;
-            padding: 12px 14px;
+            padding: 10px 14px;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
@@ -215,15 +244,16 @@
         }
 
         .preset-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
             background-color: #1d2636;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #00d2ff;
             flex-shrink: 0;
+            font-size: 16px;
         }
 
         .preset-card.active .preset-icon {
@@ -239,13 +269,13 @@
             font-size: 13px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 3px;
+            margin-bottom: 2px;
         }
 
         .preset-sub {
             font-size: 10px;
             color: #8a99ad;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .check-mark {
@@ -265,7 +295,7 @@
             display: flex;
         }
 
-        /* Nút Build Cache */
+        /* Nút Build File */
         .download-btn {
             width: 100%;
             padding: 14px;
@@ -277,7 +307,7 @@
             font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            margin-top: 5px;
+            margin-top: 8px;
             box-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
         }
 
@@ -324,112 +354,125 @@
         <!-- HEADER -->
         <div class="header">
             <div class="user-info">
-                <div class="avatar">🐱</div>
+                <div class="avatar">🔥</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">FREE</span>
+                        BUILD FILE <span class="free-badge">FREE FIRE</span>
                     </div>
-                    <div class="subtitle">STUDIO • BUILD ENGINE</div>
+                    <div class="subtitle">ENGINE CACHE INJECTOR</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">ONLINE</div>
+                <div class="status-online">READY</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Aim Customizer)</div>
+        <div class="page-title">Cache_res (Free Fire Core)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
             
-            <!-- BANNER HIỂN THỊ KHUNG XƯƠNG & VÙNG ĐỎ ĐỘNG -->
+            <!-- BANNER KHUNG XƯƠNG & VÙNG ĐỎ ĐỘNG -->
             <div class="preview-banner">
                 <div class="preview-image" id="previewContainer">
-                    <!-- SVG Khung xương nhân vật sẽ thay đổi trực quan dựa vào lựa chọn -->
-                    <svg viewBox="0 0 120 180" fill="none">
-                        <!-- Thân nhân vật mờ -->
-                        <line x1="60" y1="45" x2="60" y2="130" stroke="#334155" stroke-width="3"/>
-                        <line x1="60" y1="65" x2="35" y2="100" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="60" y1="65" x2="85" y2="100" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="60" y1="130" x2="40" y2="175" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="60" y1="130" x2="80" y2="175" stroke="#334155" stroke-width="2.5"/>
-                        <circle cx="60" cy="28" r="15" stroke="#475569" stroke-width="2"/>
+                    <svg viewBox="0 0 120 160" fill="none">
+                        <!-- Khung xương nhân vật -->
+                        <line x1="60" y1="40" x2="60" y2="115" stroke="#334155" stroke-width="3"/>
+                        <line x1="60" y1="55" x2="35" y2="85" stroke="#334155" stroke-width="2.5"/>
+                        <line x1="60" y1="55" x2="85" y2="85" stroke="#334155" stroke-width="2.5"/>
+                        <line x1="60" y1="115" x2="42" y2="150" stroke="#334155" stroke-width="2.5"/>
+                        <line x1="60" y1="115" x2="78" y2="150" stroke="#334155" stroke-width="2.5"/>
+                        <circle cx="60" cy="24" r="14" stroke="#475569" stroke-width="2"/>
                         
-                        <!-- Vùng đỏ mục tiêu động (Sẽ được JS thay đổi vị trí) -->
+                        <!-- Vòng tròn đỏ mục tiêu động -->
                         <g id="targetZone">
-                            <circle cx="60" cy="42" r="12" fill="rgba(255, 0, 0, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="3,3"/>
-                            <circle cx="60" cy="42" r="3" fill="#ff3333"/>
+                            <circle cx="60" cy="38" r="10" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
+                            <circle cx="60" cy="38" r="3" fill="#ff3333"/>
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🎯 Vùng Cổ & Cằm: Kéo tâm hít chặt Headshot 100%</div>
+                <div class="preview-desc" id="bannerDesc">🎯 Vùng Cổ (Neck): Khóa hít headshot cực mượt</div>
+            </div>
+
+            <!-- TRẠNG THÁI FILE GỐC FF ĐANG ĐƯỢC GHI ĐÈ -->
+            <div class="file-status-box">
+                <div class="file-status-title">
+                    <span>📁 File Gốc Free Fire: <span style="color:#fff;">com.dts.freefireth.cache</span></span>
+                    <span style="color: #00e676;">● Đã nạp sẵn</span>
+                </div>
+                <div class="code-preview" id="codePreviewBox">{
+  "game": "Free Fire",
+  "target_bone": "neck",
+  "hitbox_radius": 0.08,
+  "aim_lock": true
+}</div>
             </div>
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng Tùy Chỉnh (Presets)
+                <span>✨</span> Chọn Chức Năng Ghi Đè File Gốc
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
                 <!-- Aim Cổ -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ (Neck Lock)', 'Khóa chặt vùng cổ, trợ kéo headshot cực mượt', 60, 42, 12, '🎯 Vùng Cổ & Cằm: Hít chặt Headshot chuẩn xác nhất')">
+                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ (Neck Lock)', 'Khóa chặt vùng cổ, trợ kéo headshot cực mượt', 'neck', 0.09, 60, 38, 10, '🎯 Vùng Cổ (Neck): Khóa hít headshot cực mượt')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
                         <div class="preset-title">Aim Cổ (Neck Lock)</div>
-                        <div class="preset-sub">Khóa chặt vùng cổ, trợ kéo headshot cực mượt</div>
+                        <div class="preset-sub">Ghi đè thông số hít tâm trực tiếp vào vùng cổ</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Mod Nhẹ Tâm -->
-                <div class="preset-card" onclick="selectPreset(this, 'Mod Nhẹ Tâm', 'Radius 0.099m nhẹ tâm ghim đầu cực nhạy', 60, 28, 16, '🎯 Vùng Đầu (Head): Mở rộng vòng ngắm cực nhạy')">
+                <div class="preset-card" onclick="selectPreset(this, 'Mod Nhẹ Tâm', 'Radius 0.099m nhẹ tâm ghim đầu cực nhạy', 'head', 0.099, 60, 24, 13, '🎯 Vùng Đầu (Head): Mở rộng vòng ngắm nhẹ tâm')">
                     <div class="preset-icon">🎛️</div>
                     <div class="preset-info">
                         <div class="preset-title">Mod Nhẹ Tâm</div>
-                        <div class="preset-sub">Radius 0.099m nhẹ tâm ghim đầu cực nhạy</div>
+                        <div class="preset-sub">Ghi đè thông số Radius vào file gốc Free Fire</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Ghim Headshot -->
-                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot (Chest-Neck)', 'Đầu to +68%, kéo nhẹ từ ngực lên cổ', 60, 48, 15, '🎯 Vùng Ngực & Cổ: Hỗ trợ kéo tâm bay thẳng lên đầu')">
+                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot (Chest-Neck)', 'Đầu to +68%, kéo nhẹ từ ngực lên cổ', 'chest_to_neck', 0.12, 60, 44, 14, '🎯 Vùng Ngực & Cổ: Hỗ trợ kéo tâm bay thẳng lên đầu')">
                     <div class="preset-icon">⚡</div>
                     <div class="preset-info">
                         <div class="preset-title">Ghim Headshot (Chest-Neck)</div>
-                        <div class="preset-sub">Đầu to +68%, kéo nhẹ từ ngực lên cổ</div>
+                        <div class="preset-sub">Mở rộng hitbox ngực lên cổ trong file cache</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Bắn Thân = Headshot -->
-                <div class="preset-card" onclick="selectPreset(this, 'Bắn Thân = Headshot (Body Lock)', 'Kéo tâm từ bụng/ngực tự động dính đầu', 60, 90, 22, '🎯 Vùng Thân/Bụng: Mở rộng vùng hút đạn lên thân trên')">
+                <div class="preset-card" onclick="selectPreset(this, 'Bắn Thân = Headshot (Body Lock)', 'Kéo tâm từ bụng/ngực tự động dính đầu', 'spine_to_head', 0.16, 60, 80, 20, '🎯 Vùng Thân/Bụng: Hút đạn thông minh lên thân trên')">
                     <div class="preset-icon">🛡️</div>
                     <div class="preset-info">
                         <div class="preset-title">Bắn Thân = Headshot (Body Lock)</div>
-                        <div class="preset-sub">Kéo tâm từ bụng/ngực tự động dính đầu</div>
+                        <div class="preset-sub">Ghi đè thông số hút tâm từ thân lên đầu</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Magic Bullet -->
-                <div class="preset-card" onclick="selectPreset(this, 'Magic Bullet (Bone Spine)', 'Hitbox thân (Spine) phình to bao quanh người', 60, 100, 35, '🎯 Vùng Diện T rộng (Magic): Phình to toàn thân dễ trúng')">
+                <div class="preset-card" onclick="selectPreset(this, 'Magic Bullet (Bone Spine)', 'Hitbox thân (Spine) phình to bao quanh người', 'full_spine_magic', 0.35, 60, 75, 32, '🎯 Toàn Thân (Magic): Hitbox phình to siêu lớn')">
                     <div class="preset-icon">🪄</div>
                     <div class="preset-info">
                         <div class="preset-title">Magic Bullet (Bone Spine)</div>
-                        <div class="preset-sub">Hitbox thân (Spine) phình to bao quanh người</div>
+                        <div class="preset-sub">Phình to toàn bộ vùng hitbox bên trong file cache</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Khôi Phục Gốc -->
-                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Chuẩn Game)', 'Đưa tất cả về thông số nguyên bản 100%', 60, 28, 5, '⚙️ Trạng thái mặc định gốc của game')">
+                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Chuẩn Game)', 'Đưa tất cả về thông số nguyên bản 100%', 'default_game', 0.03, 60, 24, 5, '⚙️ Trạng thái mặc định nguyên bản Free Fire')">
                     <div class="preset-icon">🔄</div>
                     <div class="preset-info">
                         <div class="preset-title">Khôi Phục Gốc (Chuẩn Game)</div>
-                        <div class="preset-sub">Đưa tất cả về thông số nguyên bản 100%</div>
+                        <div class="preset-sub">Khôi phục file cache Free Fire về gốc 100%</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -437,10 +480,10 @@
             </div>
 
             <!-- NÚT BUILD FILE -->
-            <button class="download-btn" onclick="buildFileCache()">⚡ BUILD & TẢI FILE CACHE_RES</button>
+            <button class="download-btn" onclick="buildFreeFireCache()">⚡ BUILD & XUẤT FILE CACHE FF</button>
         </div>
 
-        <!-- BOTTOM NAVIGATION (Đã bỏ phần định vị) -->
+        <!-- BOTTOM NAVIGATION -->
         <div class="navbar">
             <div class="nav-item">
                 <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
@@ -466,45 +509,58 @@
     </div>
 
 <script>
-    let currentPresetName = "Aim Cổ (Neck Lock)";
-    let currentPresetDesc = "Khóa chặt vùng cổ, trợ kéo headshot cực mượt";
+    // 1. FILE CACHE GỐC CỦA GAME FREE FIRE ĐƯỢC TÍCH HỢP SẴN TRONG HỆ THỐNG
+    let freeFireOriginalCache = {
+        game_title: "Free Fire Official Cache",
+        package: "com.dts.freefireth",
+        version: "v1.104.5",
+        engine_build: "global_release_cache",
+        bone_target: "neck",
+        hitbox_radius: 0.08,
+        aim_lock: true,
+        sensitivity_scale: 1.0,
+        modified_timestamp: null
+    };
 
-    // Hàm chọn preset và thay đổi vị trí vòng đỏ động trên khung xương mẫu
-    function selectPreset(element, name, sub, cx, cy, radius, bannerText) {
+    let currentPresetName = "Aim Cổ (Neck Lock)";
+
+    // Hàm chọn chức năng: Tự động ghi đè thông số vào file cache gốc Free Fire & cập nhật khung xương mẫu
+    function selectPreset(element, name, sub, boneTarget, radiusVal, cx, cy, circleRadius, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => {
             card.classList.remove('active');
         });
         element.classList.add('active');
         
         currentPresetName = name;
-        currentPresetDesc = sub;
 
-        // Thay đổi tọa độ và kích thước vòng đỏ (vùng headshot) trên SVG khung mẫu
+        // TỰ ĐỘNG THAY ĐỔI GIÁ TRỊ BÊN TRONG FILE GỐC FREE FIRE
+        freeFireOriginalCache.bone_target = boneTarget;
+        freeFireOriginalCache.hitbox_radius = radiusVal;
+        freeFireOriginalCache.modified_timestamp = new Date().toISOString();
+
+        // Cập nhật ô hiển thị code file gốc đang thay đổi trực tiếp
+        document.getElementById('codePreviewBox').innerText = JSON.stringify(freeFireOriginalCache, null, 2);
+
+        // Cập nhật vòng tròn đỏ dịch chuyển trên khung xương mẫu
         const targetZone = document.getElementById('targetZone');
         targetZone.innerHTML = `
-            <circle cx="${cx}" cy="${cy}" r="${radius}" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="3,3"/>
+            <circle cx="${cx}" cy="${cy}" r="${circleRadius}" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
             <circle cx="${cx}" cy="${cy}" r="3.5" fill="#ff3333"/>
         `;
 
-        // Cập nhật thông báo mô tả vùng đỏ
+        // Cập nhật thông báo mô tả
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // Tải xuống file cấu hình cache_res đã chọn
-    function buildFileCache() {
-        const cachePayload = {
-            module: "CACHE_RES_AIM_ENGINE",
-            selected_preset: currentPresetName,
-            description: currentPresetDesc,
-            timestamp: new Date().toISOString(),
-            status: "SUCCESS_INJECTED"
-        };
-
-        const jsonString = JSON.stringify(cachePayload, null, 2);
-        const blob = new Blob([jsonString], { type: 'application/json' });
+    // Tải xuống file cache Free Fire đã được ghi đè thông số
+    function buildFreeFireCache() {
+        freeFireOriginalCache.modified_timestamp = new Date().toISOString();
+        
+        const finalJsonString = JSON.stringify(freeFireOriginalCache, null, 2);
+        const blob = new Blob([finalJsonString], { type: 'application/json' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = "Cache_res_" + currentPresetName.toLowerCase().replace(/[^a-z0-9]/g, '_') + ".cache";
+        link.download = "com.dts.freefireth.cache"; // Xuất đúng tên file cache gốc của game
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
