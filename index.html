@@ -1,67 +1,275 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hệ Thống Make Định Vị Shader</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Định Vị & Make Cache All-In-One</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid #333;
+        }
+        h2 {
+            text-align: center;
+            color: #00e676;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 20px;
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #00b0ff;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 6px;
+            color: #aaa;
+            font-size: 13px;
+        }
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .option-item {
+            background: #252525;
+            border: 1px solid #3d3d3d;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .checkbox-label input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: #00e676;
+        }
+        .sub-input {
+            margin-top: 10px;
+            display: none;
+            padding-left: 5px;
+        }
+        .grid-2 {
+            display: flex;
+            gap: 10px;
+        }
+        .grid-2 > div {
+            flex: 1;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #00c853, #00e676);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="crown">👑</div>
-      <h2>web make định vị by <span>Oishi</span></h2>
-      <p>Chào mừng bạn quay trở lại với hệ thống make định vị. Mọi thứ đã sẵn sàng!</p>
-    </header>
 
-    <!-- Chọn File Bundle -->
-    <div class="file-box" onclick="document.getElementById('fileInput').click()">
-      <b>📂 Bấm để chọn file bundle</b>
-      <span>assetindexer / shaders / optionalavatarres_commonab_shader</span>
-      <input type="file" id="fileInput" hidden>
-      <div id="fileName" class="file-status">Chưa có file nào được chọn</div>
+<div class="card">
+    <h2>APP MAKE ĐỊNH VỊ & MAKE CACHE</h2>
+
+    <!-- 1. NẠP FILE HOẶC DÁN NỘI DUNG GỐC -->
+    <div class="section-title">1. Cấu hình gốc / File Input</div>
+    <div class="form-group">
+        <label>Chọn file cấu hình gốc (.json / .txt / .cache):</label>
+        <input type="file" id="fileInput" accept=".json,.txt,.cache" onchange="loadCacheFile(event)">
+    </div>
+    <div class="form-group">
+        <label>Hoặc dán nội dung cấu hình gốc vào đây:</label>
+        <textarea id="rawCache" rows="3" placeholder='{"lat": 21.0285, "lng": 105.8542, "sensitivity": 1.0}'></textarea>
     </div>
 
-    <!-- Tùy chỉnh Preset -->
-    <details open class="preset-box">
-      <summary>⚙️ Cấu hình Preset 3 & 4 (Shader Mod)</summary>
-      <div class="content">
-        <div class="input-group">
-          <label>Màu viền / Rim Color (HEX):</label>
-          <input type="color" id="rimColor" value="#ff0000">
-        </div>
+    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #333;">
 
-        <div class="checkbox-group">
-          <input type="checkbox" id="wallhack" checked>
-          <label for="wallhack"><b>Xuyên tường</b> (zTest = 8 - Always)</label>
-        </div>
-        <p class="note">Đưa <code>zTest = 8</code> trong render state giúp hiển thị nhân vật qua vật cản.</p>
+    <!-- 2. CÁC TÙY CHỌN CHỨC NĂNG THAY ĐỔI -->
+    <div class="section-title">2. Chọn chức năng muốn thay đổi</div>
 
-        <div class="checkbox-group">
-          <input type="checkbox" id="hologram">
-          <label for="hologram">Bật hiệu ứng Hologram gốc</label>
+    <!-- CHỨC NĂNG: MAKE ĐỊNH VỊ / TỌA ĐỘ -->
+    <div class="option-item">
+        <label class="checkbox-label">
+            <input type="checkbox" id="chkLocation" onchange="toggleOption('chkLocation', 'boxLocation')">
+            Chức năng 1: Make Định Vị (GPS / Coordinates)
+        </label>
+        <div id="boxLocation" class="sub-input">
+            <div class="grid-2">
+                <div>
+                    <label>Vĩ độ (Latitude):</label>
+                    <input type="text" id="valLat" placeholder="21.028511">
+                </div>
+                <div>
+                    <label>Kinh độ (Longitude):</label>
+                    <input type="text" id="valLng" placeholder="105.854167">
+                </div>
+            </div>
+            <div style="margin-top: 8px;">
+                <label>Tên vị trí giả lập:</label>
+                <input type="text" id="valLocName" placeholder="Ví dụ: Hanoi, Vietnam">
+            </div>
         </div>
-      </div>
-    </details>
-
-    <!-- Thao tác tạo file -->
-    <div class="actions">
-      <button id="btnProcess" class="btn primary">⚡ Tạo File</button>
-      <a id="btnDownload" class="btn download" style="display: none;">📥 Tải File Đã Sửa</a>
     </div>
 
-    <!-- Hướng dẫn sử dụng -->
-    <div class="guide-box">
-      <h3>📖 Hướng dẫn sử dụng</h3>
-      <ul>
-        <li><b>1. Lấy file bundle:</b> Dùng ứng dụng quản lý file (ZArchiver, v.v.) truy cập vào thư mục game: <code>Android/data/com.dts.freefireth/files/contentcache/Compulsory/android/gameassetbundles/</code></li>
-        <li><b>2. Chọn file:</b> Nhấp vào ô chọn file ở trên và tải file bundle lên.</li>
-        <li><b>3. Chỉnh sửa:</b> Bật/tắt các tính năng theo ý muốn và chọn "Tạo File".</li>
-        <li><b>4. Thay thế:</b> Tải file sau khi sửa về và chép đè vào vị trí cũ trong game.</li>
-      </ul>
+    <!-- CHỨC NĂNG: AIM BODY -->
+    <div class="option-item">
+        <label class="checkbox-label">
+            <input type="checkbox" id="chkAimBody" onchange="toggleOption('chkAimBody', 'boxAimBody')">
+            Chức năng 2: Aim Body (Ghim Thân)
+        </label>
+        <div id="boxAimBody" class="sub-input">
+            <label>Tỉ lệ ghim thân / Lock Body:</label>
+            <select id="valAimBody">
+                <option value="100%">Mạnh (100%)</option>
+                <option value="80%">Vừa (80%)</option>
+                <option value="50%">Nhẹ (50%)</option>
+            </select>
+        </div>
     </div>
-  </div>
 
-  <script src="script.js"></script>
+    <!-- CHỨC NĂNG: AIM CỔ -->
+    <div class="option-item">
+        <label class="checkbox-label">
+            <input type="checkbox" id="chkAimNeck" onchange="toggleOption('chkAimNeck', 'boxAimNeck')">
+            Chức năng 3: Aim Cổ (Ghim Cổ / Trợ Kéo)
+        </label>
+        <div id="boxAimNeck" class="sub-input">
+            <label>Chế độ ghim cổ / Headshot Support:</label>
+            <select id="valAimNeck">
+                <option value="auto_neck">Khóa Vùng Cổ (Auto Neck Fix)</option>
+                <option value="smooth_neck">Trượt Dưới Cổ (Smooth Neck Drag)</option>
+                <option value="high_sensitivity">Tăng Độ Nhạy Vùng Cổ</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- CHỨC NĂNG: ĐỔI OS -->
+    <div class="option-item">
+        <label class="checkbox-label">
+            <input type="checkbox" id="chkOS" onchange="toggleOption('chkOS', 'boxOS')">
+            Chức năng 4: Thay đổi Giá trị OS (System OS)
+        </label>
+        <div id="boxOS" class="sub-input">
+            <input type="text" id="valOS" value="iOS 17.5" placeholder="Ví dụ: iOS 18.0, Android 14...">
+        </div>
+    </div>
+
+    <button onclick="generateFinalFile()">TẠO & TẢI FILE CẤU HÌNH MỚI</button>
+</div>
+
+<script>
+    // Ẩn/Hiện phần cấu hình chi tiết khi tích chọn
+    function toggleOption(chkId, boxId) {
+        const isChecked = document.getElementById(chkId).checked;
+        document.getElementById(boxId).style.display = isChecked ? 'block' : 'none';
+    }
+
+    // Đọc dữ liệu từ file đính kèm
+    function loadCacheFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('rawCache').value = e.target.result;
+        };
+        reader.readAsText(file);
+    }
+
+    // Xử lý tạo dữ liệu tổng hợp
+    function generateFinalFile() {
+        const rawContent = document.getElementById('rawCache').value.trim();
+        let configObj = {};
+
+        if (rawContent) {
+            try {
+                configObj = JSON.parse(rawContent);
+            } catch (e) {
+                configObj = { original_data: rawContent };
+            }
+        }
+
+        // 1. Xử lý Make Định Vị
+        if (document.getElementById('chkLocation').checked) {
+            configObj.location_spoof = true;
+            configObj.latitude = document.getElementById('valLat').value || "21.028511";
+            configObj.longitude = document.getElementById('valLng').value || "105.854167";
+            configObj.location_name = document.getElementById('valLocName').value || "Custom Location";
+        }
+
+        // 2. Xử lý Aim Body
+        if (document.getElementById('chkAimBody').checked) {
+            configObj.aim_body = true;
+            configObj.aim_body_val = document.getElementById('valAimBody').value;
+        }
+
+        // 3. Xử lý Aim Cổ
+        if (document.getElementById('chkAimNeck').checked) {
+            configObj.aim_neck = true;
+            configObj.aim_neck_mode = document.getElementById('valAimNeck').value;
+        }
+
+        // 4. Xử lý Đổi OS
+        if (document.getElementById('chkOS').checked) {
+            const osVal = document.getElementById('valOS').value;
+            configObj.os = osVal;
+            configObj.os_version = osVal;
+        }
+
+        // Xuất file cấu hình tổng hợp
+        const jsonStr = JSON.stringify(configObj, null, 2);
+        const blob = new Blob([jsonStr], { type: 'application/json' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = "make_cache_location.cache";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+
 </body>
 </html>
