@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Make Định Vị Shader</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="crown">👑</div>
+      <h2>web make định vị by <span>Oishi</span></h2>
+      <p>Chào mừng bạn quay trở lại với hệ thống make định vị. Mọi thứ đã sẵn sàng!</p>
+    </header>
+
+    <!-- Chọn File Bundle -->
+    <div class="file-box" onclick="document.getElementById('fileInput').click()">
+      <b>📂 Bấm để chọn file bundle</b>
+      <span>assetindexer / shaders / optionalavatarres_commonab_shader</span>
+      <input type="file" id="fileInput" hidden>
+      <div id="fileName" class="file-status">Chưa có file nào được chọn</div>
+    </div>
+
+    <!-- Tùy chỉnh Preset -->
+    <details open class="preset-box">
+      <summary>⚙️ Cấu hình Preset 3 & 4 (Shader Mod)</summary>
+      <div class="content">
+        <div class="input-group">
+          <label>Màu viền / Rim Color (HEX):</label>
+          <input type="color" id="rimColor" value="#ff0000">
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="wallhack" checked>
+          <label for="wallhack"><b>Xuyên tường</b> (zTest = 8 - Always)</label>
+        </div>
+        <p class="note">Đưa <code>zTest = 8</code> trong render state giúp hiển thị nhân vật qua vật cản.</p>
+
+        <div class="checkbox-group">
+          <input type="checkbox" id="hologram">
+          <label for="hologram">Bật hiệu ứng Hologram gốc</label>
+        </div>
+      </div>
+    </details>
+
+    <!-- Thao tác tạo file -->
+    <div class="actions">
+      <button id="btnProcess" class="btn primary">⚡ Tạo File</button>
+      <a id="btnDownload" class="btn download" style="display: none;">📥 Tải File Đã Sửa</a>
+    </div>
+
+    <!-- Hướng dẫn sử dụng -->
+    <div class="guide-box">
+      <h3>📖 Hướng dẫn sử dụng</h3>
+      <ul>
+        <li><b>1. Lấy file bundle:</b> Dùng ứng dụng quản lý file (ZArchiver, v.v.) truy cập vào thư mục game: <code>Android/data/com.dts.freefireth/files/contentcache/Compulsory/android/gameassetbundles/</code></li>
+        <li><b>2. Chọn file:</b> Nhấp vào ô chọn file ở trên và tải file bundle lên.</li>
+        <li><b>3. Chỉnh sửa:</b> Bật/tắt các tính năng theo ý muốn và chọn "Tạo File".</li>
+        <li><b>4. Thay thế:</b> Tải file sau khi sửa về và chép đè vào vị trí cũ trong game.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
