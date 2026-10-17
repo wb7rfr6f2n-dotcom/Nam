@@ -178,7 +178,7 @@
             display: inline-block;
         }
 
-        /* Khung chọn file cache thật từ game */
+        /* Khung chọn file cache thật từ thiết bị */
         .upload-box {
             background-color: #121824;
             border: 1.5px dashed #00e676;
@@ -188,6 +188,7 @@
             margin-bottom: 14px;
             cursor: pointer;
             transition: background 0.2s;
+            display: block;
         }
         .upload-box:hover {
             background-color: #162032;
@@ -392,12 +393,12 @@
                 <div class="preview-desc" id="bannerDesc">🎯 Vùng Cổ (Neck): Khóa hít headshot cực mượt</div>
             </div>
 
-            <!-- KHUNG CHỌN FILE CACHE THẬT TỪ THƯ MỤC GAME -->
+            <!-- KHUNG CHỌN TẤT CẢ CÁC TỆP/FILE TRONG THIẾT BỊ -->
             <label for="realCacheInput" class="upload-box">
-                <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc từ game (.cache / .dat)</div>
-                <div class="upload-desc">Nhấn để nạp file cache thực tế trong thư mục Free Fire của bạn</div>
+                <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc từ game của bạn</div>
+                <div class="upload-desc">Hỗ trợ tất cả định dạng file từ bộ nhớ/ZArchiver</div>
             </label>
-            <input type="file" id="realCacheInput" accept=".cache,.dat,.bin,.*" onchange="loadRealGameCache(event)">
+            <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
 
             <!-- SECTION HEADER -->
             <div class="section-header">
@@ -499,29 +500,27 @@
     </div>
 
 <script>
-    let loadedFileContent = null;
-    let loadedFileName = "com.dts.freefireth.cache";
+    let uploadedFileRawData = null;
+    let uploadedFileName = "game_config.cache";
     let currentBoneTarget = "neck";
     let currentRadius = 0.09;
 
-    // 1. HÀM NẠP FILE CACHE GỐC THẬT TỪ THƯ MỤC GAME
+    // 1. NẠP TẤT CẢ CÁC TỆP/FILE GỐC TỪ THIẾT BỊ HOẶC ZARCHIVER
     function loadRealGameCache(event) {
         const file = event.target.files[0];
         if (!file) return;
 
-        loadedFileName = file.name;
-        document.getElementById('fileStatusText').innerHTML = `✅ Đã nạp file gốc: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
+        uploadedFileName = file.name;
+        document.getElementById('fileStatusText').innerHTML = `✅ Đã nhận file gốc: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
 
         const reader = new FileReader();
         reader.onload = function(e) {
-            // Lưu nội dung thô (hoặc chuỗi JSON/Binary) của file gốc vào biến hệ thống
-            loadedFileContent = e.target.result;
+            uploadedFileRawData = e.target.result; // Lưu dữ liệu thô của file vào bộ nhớ tạm
         };
-        // Đọc file dưới dạng Text/JSON để có thể inject thông số (nếu file dạng binary có thể xử lý ArrayBuffer)
         reader.readAsText(file);
     }
 
-    // 2. CHỌN CHỨC NĂNG & THAY ĐỔI TRỰC TIẾP GIÁ TRỊ VÙNG ĐỎ TRÊN KHUNG XƯƠNG
+    // 2. CHỌN CHỨC NĂNG & THAY ĐỔI VÙNG ĐỎ TRÊN KHUNG XƯƠNG
     function selectPreset(element, name, sub, boneTarget, radiusVal, cx, cy, circleRadius, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => {
             card.classList.remove('active');
@@ -531,7 +530,7 @@
         currentBoneTarget = boneTarget;
         currentRadius = radiusVal;
 
-        // Cập nhật tọa độ vòng đỏ động trên khung xương mẫu
+        // Cập nhật vòng tròn đỏ động trên khung xương mẫu
         const targetZone = document.getElementById('targetZone');
         targetZone.innerHTML = `
             <circle cx="${cx}" cy="${cy}" r="${circleRadius}" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
@@ -541,46 +540,40 @@
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. XỬ LÝ GHI ĐÈ THÔNG SỐ VÀ TẢI VỀ FILE CACHE MỚI
+    // 3. GHI ĐÈ GIÁ TRỊ VÀO FILE GỐC VÀ TẢI XUỐNG
     function buildRealGameCache() {
         let finalOutputData = "";
 
-        if (loadedFileContent) {
+        if (uploadedFileRawData) {
             try {
-                // Thử phân tích cú pháp nếu file gốc là JSON/Text cấu hình
-                let cacheObj = JSON.parse(loadedFileContent);
-                cacheObj.bone_target = currentBoneTarget;
-                cacheObj.hitbox_radius = currentRadius;
-                cacheObj.injected_timestamp = new Date().toISOString();
-                finalOutputData = JSON.stringify(cacheObj, null, 2);
+                // Nếu file gốc có cấu trúc dạng JSON/Text, tiến hành ghi đè trực tiếp các thông số bên trong
+                let cacheJson = JSON.parse(uploadedFileRawData);
+                cacheJson.bone_target = currentBoneTarget;
+                cacheJson.hitbox_radius = currentRadius;
+                cacheJson.injected_preset = currentBoneTarget;
+                cacheJson.modified_at = new Date().toISOString();
+                finalOutputData = JSON.stringify(cacheJson, null, 2);
             } catch (err) {
-                // Nếu file gốc là file nhị phân (binary cache), ta sẽ đóng gói dữ liệu cấu hình đính kèm thông số vào
+                // Nếu file gốc là file nhị phân (binary), bọc dữ liệu và đính kèm thông số cấu hình mới vào gói
                 let binaryWrapper = {
-                    original_file_name: loadedFileName,
+                    original_file: uploadedFileName,
                     target_bone: currentBoneTarget,
-                    radius: currentRadius,
-                    payload_data: loadedFileContent,
-                    status: "INJECTED_SUCCESS"
+                    radius_scale: currentRadius,
+                    payload: uploadedFileRawData,
+                    status: "MODIFIED_SUCCESS"
                 };
                 finalOutputData = JSON.stringify(binaryWrapper, null, 2);
             }
         } else {
-            // Nếu chưa nạp file, tự động tạo file cache tiêu chuẩn dựa trên file gốc giả định của game
-            let defaultObj = {
-                game: "Free Fire",
-                file: "com.dts.freefireth.cache",
-                bone_target: currentBoneTarget,
-                hitbox_radius: currentRadius,
-                status: "AUTO_GENERATED"
-            };
-            finalOutputData = JSON.stringify(defaultObj, null, 2);
+            alert("Vui lòng chọn file cache gốc từ game trước khi bấm Build!");
+            return;
         }
 
-        // Tải file cache đã được thay đổi giá trị
-        const blob = new Blob([finalOutputData], { type: 'application/json' });
+        // Xuất file mới giữ nguyên tên của file gốc
+        const blob = new Blob([finalOutputData], { type: 'application/octet-stream' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = loadedFileName.includes('.') ? loadedFileName : "com.dts.freefireth.cache";
+        link.download = uploadedFileName;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
