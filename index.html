@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Ultimate Safe Neck & Shoulder Patcher</title>
+    <title>BUILD FILE - Free Fire Ultimate Safe Patcher</title>
     <style>
         * {
             box-sizing: border-box;
@@ -55,7 +55,7 @@
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ff3333, #ff9900);
+            background: linear-gradient(135deg, #00e676, #00b0ff);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -72,8 +72,8 @@
         }
 
         .free-badge {
-            background-color: #ff3333;
-            color: #fff;
+            background-color: #00e676;
+            color: #000;
             font-size: 9px;
             padding: 2px 6px;
             border-radius: 4px;
@@ -94,9 +94,9 @@
         }
 
         .status-online {
-            background-color: #281212;
-            border: 1px solid #ff3333;
-            color: #ff3333;
+            background-color: #12281c;
+            border: 1px solid #00e676;
+            color: #00e676;
             font-size: 10px;
             font-weight: bold;
             padding: 4px 10px;
@@ -110,7 +110,7 @@
             content: '';
             width: 6px;
             height: 6px;
-            background-color: #ff3333;
+            background-color: #00e676;
             border-radius: 50%;
         }
 
@@ -145,8 +145,8 @@
 
         /* Banner khung xương động */
         .preview-banner {
-            background: radial-gradient(circle at center, #1a1622 0%, #10121a 100%);
-            border: 1px solid #2a1f2e;
+            background: radial-gradient(circle at center, #14281c 0%, #101519 100%);
+            border: 1px solid #1a3825;
             border-radius: 16px;
             padding: 12px;
             text-align: center;
@@ -169,11 +169,11 @@
 
         .preview-desc {
             font-size: 11px;
-            color: #ff3333;
+            color: #00e676;
             font-weight: 700;
-            background-color: rgba(255, 51, 51, 0.12);
-            border: 1px solid rgba(255, 51, 51, 0.3);
-            padding: 5px 10px;
+            background-color: rgba(0, 230, 118, 0.15);
+            border: 1px solid rgba(0, 230, 118, 0.4);
+            padding: 5px 12px;
             border-radius: 20px;
             display: inline-block;
         }
@@ -181,7 +181,7 @@
         /* Khung chọn file cache gốc */
         .upload-box {
             background-color: #121824;
-            border: 1.5px dashed #ff3333;
+            border: 1.5px dashed #00e676;
             border-radius: 12px;
             padding: 12px;
             text-align: center;
@@ -191,12 +191,12 @@
             display: block;
         }
         .upload-box:hover {
-            background-color: #1a1622;
+            background-color: #162032;
         }
         .upload-title {
             font-size: 12px;
             font-weight: bold;
-            color: #ff3333;
+            color: #00e676;
             margin-bottom: 4px;
         }
         .upload-desc {
@@ -207,7 +207,7 @@
             display: none;
         }
 
-        /* Bảng log trạng thái */
+        /* Khung log trạng thái */
         .scanner-log-box {
             background-color: #0d1117;
             border: 1px solid #1e2736;
@@ -250,9 +250,9 @@
         }
 
         .preset-card.active {
-            border: 1.5px solid #ff3333;
-            background-color: #241417;
-            box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+            border: 1.5px solid #00e676;
+            background-color: #12281c;
+            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
         }
 
         .preset-icon {
@@ -263,14 +263,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #ff3333;
+            color: #00e676;
             flex-shrink: 0;
             font-size: 16px;
         }
 
         .preset-card.active .preset-icon {
-            background-color: #3b191d;
-            color: #ff3333;
+            background-color: #1b3829;
+            color: #00e676;
         }
 
         .preset-info {
@@ -293,12 +293,12 @@
         .check-mark {
             width: 18px;
             height: 18px;
-            background-color: #ff3333;
+            background-color: #00e676;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: #000;
             font-size: 11px;
             font-weight: bold;
         }
@@ -311,16 +311,23 @@
         .download-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #ff3333, #ff9900);
-            color: #fff;
+            background: linear-gradient(135deg, #333, #444);
+            color: #888;
             border: none;
             border-radius: 12px;
             font-size: 14px;
             font-weight: 800;
             text-transform: uppercase;
-            cursor: pointer;
+            cursor: not-allowed;
             margin-top: 8px;
-            box-shadow: 0 4px 20px rgba(255, 51, 51, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn.active-btn {
+            background: linear-gradient(135deg, #00c853, #00e676);
+            color: #000;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 230, 118, 0.3);
         }
 
         /* Bottom Navigation Bar */
@@ -350,7 +357,7 @@
         }
 
         .nav-item.active {
-            color: #ff3333;
+            color: #00e676;
         }
 
         .nav-item svg {
@@ -369,18 +376,18 @@
                 <div class="avatar">🎯</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">ULTIMATE SAFE</span>
+                        BUILD FILE <span class="free-badge">SAFE FIX</span>
                     </div>
-                    <div class="subtitle">NO CROSSHAIR LOSS PATCHER</div>
+                    <div class="subtitle">AIM CỔ & VAI ĐỎ</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">LOCKED</div>
+                <div class="status-online">READY</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Aim Cổ & Vai Đỏ)</div>
+        <div class="page-title">Cache_res (Safe Patcher)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
@@ -397,12 +404,12 @@
                         <circle cx="60" cy="24" r="14" stroke="#475569" stroke-width="2"/>
                         
                         <g id="targetZone">
-                            <circle cx="60" cy="42" r="13" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
-                            <circle cx="60" cy="38" r="3.5" fill="#ff3333"/>
+                            <circle cx="60" cy="42" r="13" fill="rgba(0, 230, 118, 0.3)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
+                            <circle cx="60" cy="38" r="3.5" fill="#00e676"/>
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🎯 Cổ & Vai Đỏ: Giữ nguyên 100% tâm súng, không văng game</div>
+                <div class="preview-desc" id="bannerDesc">🎯 Cổ & Vai Đỏ: Giữ nguyên tâm súng, không văng game</div>
             </div>
 
             <!-- KHUNG CHỌN FILE CACHE GỐC -->
@@ -414,7 +421,7 @@
 
             <!-- KHUNG LOG TRẠNG THÁI -->
             <div class="scanner-log-box" id="scannerLog">
-                [ULTIMATE ENGINE]: Chờ nạp tệp cache để thực hiện cô lập và thay đổi offset an toàn...
+                [SYSTEM]: Vui lòng chọn tệp cache gốc để kích hoạt nút Build.
             </div>
 
             <!-- SECTION HEADER -->
@@ -447,8 +454,8 @@
 
             </div>
 
-            <!-- NÚT BUILD FILE -->
-            <button class="download-btn" onclick="runUltimateSafePatch()">⚡ BUILD & XUẤT FILE CACHE AN TOÀN</button>
+            <!-- NÚT BUILD FILE (Ban đầu bị khóa, sau khi chọn file sẽ sáng lên) -->
+            <button id="buildBtn" class="download-btn" onclick="runUltimateSafePatch()">⚡ VUI LÒNG CHỌN FILE ĐỂ BUILD</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -488,11 +495,16 @@
 
         originalFileName = file.name;
         document.getElementById('fileStatusText').innerHTML = `✅ Đã nhận: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
-        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp tệp "${file.name}" (${file.size} bytes). Vùng HUD & Camera được khóa bảo vệ an toàn.`;
+        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp tệp "${file.name}" (${file.size} bytes). Sẵn sàng Build!`;
 
         const reader = new FileReader();
         reader.onload = function(e) {
             rawFileBuffer = e.target.result;
+            
+            // Kích hoạt nút Build khi file đã load xong vào bộ nhớ
+            const btn = document.getElementById('buildBtn');
+            btn.classList.add('active-btn');
+            btn.innerText = "⚡ BUILD & XUẤT FILE CACHE AN TOÀN";
         };
         reader.readAsArrayBuffer(file);
     }
@@ -515,12 +527,12 @@
     // 3. THUẬT TOÁN PATCH CÔ LẬP CHÍNH XÁC (Strict Isolated Signature Patcher)
     function runUltimateSafePatch() {
         if (!rawFileBuffer) {
-            alert("Vui lòng chọn file cache gốc từ game trước khi bấm Build!");
+            alert("Vui lòng chọn file cache gốc trước khi bấm Build!");
             return;
         }
 
         let logBox = document.getElementById('scannerLog');
-        logBox.innerHTML = "[PROCESS]: Đang phân tích và cô lập vùng dữ liệu xương độc lập...";
+        logBox.innerHTML = "[PROCESS]: Đang phân tích và xử lý tệp...";
 
         // Tạo mảng byte sao chép chính xác từ file gốc (Giữ nguyên dung lượng 100%)
         let byteArray = new Uint8Array(rawFileBuffer.slice(0));
@@ -529,23 +541,21 @@
             let patchedCount = 0;
 
             // Quét chính xác chuỗi Signature nhận diện khối cấu trúc BONE độc lập (0x42, 0x4F, 0x4E, 0x45)
-            // Tuyệt đối không quét tràn lan ở các vùng đầu và cuối file để giữ nguyên thông số HUD / Tâm súng
             for (let i = 0; i < byteArray.length - 8; i++) {
                 if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) {
-                    // Ghi đè đúng byte giá trị xương mục tiêu (0x05) tại chỗ
                     byteArray[i + 4] = targetBoneByte;
                     patchedCount++;
                 }
             }
 
             if (patchedCount > 0) {
-                logBox.innerHTML = `[SUCCESS]: Đã cô lập và patch thành công ${patchedCount} điểm offset xương. Vùng HUD tâm súng được giữ nguyên 100% không bị ảnh hưởng!`;
+                logBox.innerHTML = `[SUCCESS]: Đã patch thành công ${patchedCount} điểm offset xương. Đang tải xuống tệp...`;
             } else {
-                logBox.innerHTML = `[WARN]: Tệp không chứa signature xương tiêu chuẩn. Vui lòng kiểm tra lại tệp cache gốc.`;
+                logBox.innerHTML = `[WARN]: Không tìm thấy chuỗi signature xương trong tệp này.`;
                 return;
             }
         } else {
-            logBox.innerHTML = `[INFO]: Khôi phục trạng thái nguyên bản thành công.`;
+            logBox.innerHTML = `[INFO]: Giữ nguyên tệp gốc.`;
         }
 
         // Tải xuống tệp cache hoàn chỉnh giữ nguyên tên gốc và dung lượng chuẩn
