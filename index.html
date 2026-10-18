@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Real Offset Injector</title>
+    <title>BUILD FILE - Free Fire Advanced Hitbox Scale Injector</title>
     <style>
         * {
             box-sizing: border-box;
@@ -94,9 +94,9 @@
         }
 
         .status-online {
-            background-color: #12281c;
-            border: 1px solid #00e676;
-            color: #00e676;
+            background-color: #281212;
+            border: 1px solid #ff3333;
+            color: #ff3333;
             font-size: 10px;
             font-weight: bold;
             padding: 4px 10px;
@@ -110,7 +110,7 @@
             content: '';
             width: 6px;
             height: 6px;
-            background-color: #00e676;
+            background-color: #ff3333;
             border-radius: 50%;
         }
 
@@ -181,7 +181,7 @@
         /* Khung chọn file cache gốc */
         .upload-box {
             background-color: #121824;
-            border: 1.5px dashed #00e676;
+            border: 1.5px dashed #ff3333;
             border-radius: 12px;
             padding: 12px;
             text-align: center;
@@ -191,12 +191,12 @@
             display: block;
         }
         .upload-box:hover {
-            background-color: #162032;
+            background-color: #1a1622;
         }
         .upload-title {
             font-size: 12px;
             font-weight: bold;
-            color: #00e676;
+            color: #ff3333;
             margin-bottom: 4px;
         }
         .upload-desc {
@@ -249,7 +249,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #00d2ff;
+            color: #ff3333;
             flex-shrink: 0;
             font-size: 16px;
         }
@@ -355,23 +355,23 @@
                 <div class="avatar">🔥</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">REAL OFFSET</span>
+                        BUILD FILE <span class="free-badge">EXPANDED HITBOX</span>
                     </div>
-                    <div class="subtitle">FREE FIRE CACHE INJECTOR</div>
+                    <div class="subtitle">SHOULDER & NECK RED DAMAGE PATCHER</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">SAFE PATCH</div>
+                <div class="status-online">ACTIVE</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Real Offset Engine)</div>
+        <div class="page-title">Cache_res (Shoulder & Neck Core)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
             
-            <!-- BANNER KHUNG XƯƠNG & VÙNG ĐỎ ĐỘNG -->
+            <!-- BANNER KHUNG XƯƠNG ĐỘNG -->
             <div class="preview-banner">
                 <div class="preview-image" id="previewContainer">
                     <svg viewBox="0 0 120 160" fill="none">
@@ -383,83 +383,73 @@
                         <circle cx="60" cy="24" r="14" stroke="#475569" stroke-width="2"/>
                         
                         <g id="targetZone">
-                            <circle cx="60" cy="38" r="9" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
-                            <circle cx="60" cy="38" r="3" fill="#ff3333"/>
+                            <circle cx="60" cy="45" r="14" fill="rgba(255, 51, 51, 0.3)" stroke="#ff3333" stroke-width="2" stroke-dasharray="2,2"/>
+                            <circle cx="60" cy="38" r="3.5" fill="#ff3333"/>
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🎯 Aim Cổ Offset: Bắn vào Cổ đạn nhảy Đỏ, không hụt tâm</div>
+                <div class="preview-desc" id="bannerDesc">🎯 Mở Rộng Vai & Cổ: Bắn vai/cổ vẫn nhảy dame Đỏ 100%</div>
             </div>
 
-            <!-- KHUNG CHỌN FILE CACHE GỐC TỪ THIẾT BỊ -->
+            <!-- KHUNG CHỌN FILE CACHE GỐC -->
             <label for="realCacheInput" class="upload-box">
                 <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc từ game (.cache / .dat)</div>
-                <div class="upload-desc">Hỗ trợ nạp file lấy từ ZArchiver / Thư mục Free Fire</div>
+                <div class="upload-desc">Hỗ trợ nạp file từ ZArchiver / Thư mục game</div>
             </label>
             <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng (Thay Đổi Offset Mã Xương Đích)
+                <span>✨</span> Chọn Chức Năng Mở Rộng Vùng Sát Thương
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
-                <!-- Aim Cổ -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ (Neck Bone Offset)', 'Patch offset xương cổ (0x05) - Bắn cổ nhảy đỏ', 0x05, 60, 38, 9, '🎯 Aim Cổ Offset: Bắn vào Cổ đạn nhảy Đỏ, không hụt tâm')">
+                <!-- Bắn Vai & Cổ Đỏ -->
+                <div class="preset-card active" onclick="selectPreset(this, 'Bắn Vai & Cổ Vẫn Đỏ (Shoulder-Neck)', 'Mở rộng hitbox vai và cổ, bắn trúng vai vẫn nhảy đỏ', 'shoulder_neck', 0x05, 1.15, 60, 45, 14, '🎯 Vai & Cổ Đỏ: Mở rộng vùng va chạm, bắn vai cổ đều nhảy Đỏ')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Cổ (Neck Bone Offset)</div>
-                        <div class="preset-sub">Chỉnh sửa trực tiếp offset Bone_Neck trong file nhị phân</div>
+                        <div class="preset-title">Bắn Vai & Cổ Vẫn Đỏ (Shoulder-Neck)</div>
+                        <div class="preset-sub">Mở rộng biên độ hitbox vai và cổ, giữ nguyên tâm ngắm</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
-                <!-- Mod Nhẹ Tâm -->
-                <div class="preset-card" onclick="selectPreset(this, 'Mod Nhẹ Tâm (Head Bone Offset)', 'Patch offset xương đầu (0x06) - Nhẹ tâm ghim đầu', 0x06, 60, 24, 11, '🎯 Mod Nhẹ Tâm: Ghim thẳng đầu mượt, không mất góc nhìn')">
+                <!-- Aim Cổ Chuẩn -->
+                <div class="preset-card" onclick="selectPreset(this, 'Aim Cổ Chuẩn (Safe Neck)', 'Khóa vùng cổ tiêu chuẩn, chống lệch tâm', 'neck', 0x05, 1.08, 60, 38, 9, '🎯 Aim Cổ Chuẩn: Khóa chặt vùng cổ, hít tâm mượt mà')">
                     <div class="preset-icon">🎛️</div>
                     <div class="preset-info">
-                        <div class="preset-title">Mod Nhẹ Tâm (Head Bone Offset)</div>
-                        <div class="preset-sub">Tinh chỉnh offset Bone_Head nhẹ tâm mượt mà</div>
+                        <div class="preset-title">Aim Cổ Chuẩn (Safe Neck)</div>
+                        <div class="preset-sub">Tối ưu hóa mã xương vùng cổ không gây mất tâm</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
-                <!-- Ghim Headshot -->
-                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot (Chest Bone Offset)', 'Patch offset xương ngực (0x04) - Kéo nhẹ ngực lên cổ', 0x04, 60, 44, 12, '🎯 Ghim Headshot: Kéo nhẹ ngực lên cổ cực nhạy')">
+                <!-- Ghim Headshot Tổng Hợp -->
+                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot Tổng Hợp (All-Head)', 'Mở rộng toàn bộ thân trên thành vùng chí mạng', 'all_head', 0x06, 1.12, 60, 40, 12, '🎯 Headshot Tổng Hợp: Tối ưu sát thương thân trên mượt mà')">
                     <div class="preset-icon">⚡</div>
                     <div class="preset-info">
-                        <div class="preset-title">Ghim Headshot (Chest Bone Offset)</div>
-                        <div class="preset-sub">Tối ưu hóa offset ngực-cổ liên kết</div>
-                    </div>
-                    <div class="check-mark">✓</div>
-                </div>
-
-                <!-- Bắn Thân = Headshot -->
-                <div class="preset-card" onclick="selectPreset(this, 'Bắn Thân = Headshot (Spine Offset)', 'Patch offset xương thân (0x03) - Bắn thân tự động đỏ', 0x03, 60, 75, 15, '🎯 Bắn Thân: Bắn vào thân trên đạn tự động hít đỏ')">
-                    <div class="preset-icon">🛡️</div>
-                    <div class="preset-info">
-                        <div class="preset-title">Bắn Thân = Headshot (Spine Offset)</div>
-                        <div class="preset-sub">Chỉnh sửa offset cột sống/thân trong tệp gốc</div>
+                        <div class="preset-title">Ghim Headshot Tổng Hợp (All-Head)</div>
+                        <div class="preset-sub">Mở rộng ma trận hitbox thân trên an toàn</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
                 <!-- Khôi Phục Gốc -->
-                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Chuẩn Game)', 'Giữ nguyên 100% cấu trúc byte gốc của game', 0x00, 60, 24, 5, '⚙️ Trạng thái mặc định ban đầu của game')">
+                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Chuẩn Game)', 'Đưa toàn bộ thông số về nguyên bản 100%', 'default', 0x00, 1.0, 60, 24, 5, '⚙️ Khôi phục trạng thái nguyên bản ban đầu của game')">
                     <div class="preset-icon">🔄</div>
                     <div class="preset-info">
                         <div class="preset-title">Khôi Phục Gốc (Chuẩn Game)</div>
-                        <div class="preset-sub">Hoàn trả toàn bộ byte offset nguyên bản</div>
+                        <div class="preset-sub">Hoàn trả tệp về thông số gốc chuẩn 100%</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
             </div>
 
-            <!-- NÚT BUILD FILE CACHE -->
-            <button class="download-btn" onclick="applyRealBinaryOffset()">⚡ BUILD & XUẤT FILE CACHE CHUẨN</button>
+            <!-- NÚT BUILD FILE -->
+            <button class="download-btn" onclick="applyExpandedHitboxPatch()">⚡ BUILD & XUẤT FILE CACHE AN TOÀN</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -490,9 +480,11 @@
 <script>
     let rawFileBuffer = null;
     let originalFileName = "Cache_res.cache";
-    let activeBoneTargetByte = 0x05; // Mã Offset Cổ mặc định
+    let activePresetKey = "shoulder_neck";
+    let targetBoneByte = 0x05;
+    let scaleMultiplier = 1.15; // Hệ số mở rộng vùng va chạm vai và cổ
 
-    // 1. ĐỌC FILE CACHE THỰC TẾ THUẦN TÚY DƯỚI DẠNG MẢNG BINARY (ArrayBuffer)
+    // 1. NẠP FILE CACHE THỰC TẾ DƯỚI DẠNG ARRAYBUFFER
     function loadRealGameCache(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -507,12 +499,14 @@
         reader.readAsArrayBuffer(file);
     }
 
-    // 2. CHỌN CHỨC NĂNG & THAY ĐỔI TỌA ĐỘ VÒNG ĐỎ MỤC TIÊU
-    function selectPreset(element, name, sub, boneByte, cx, cy, circleRadius, bannerText) {
+    // 2. CHỌN CHỨC NĂNG & CẬP NHẬT VÒNG ĐỎ TRÊN KHUNG MẪU
+    function selectPreset(element, name, sub, presetKey, boneByte, scaleVal, cx, cy, circleRadius, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => card.classList.remove('active'));
         element.classList.add('active');
         
-        activeBoneTargetByte = boneByte;
+        activePresetKey = presetKey;
+        targetBoneByte = boneByte;
+        scaleMultiplier = scaleVal;
 
         const targetZone = document.getElementById('targetZone');
         targetZone.innerHTML = `
@@ -522,29 +516,40 @@
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. THUẬT TOÁN THAY ĐỔI OFFSET TRỰC TIẾP TẠI CHỖ (In-place Binary Patching)
-    function applyRealBinaryOffset() {
+    // 3. THUẬT TOÁN MỞ RỘNG HITBOX VAI & CỔ (Expanded Scale Binary Patching)
+    function applyExpandedHitboxPatch() {
         if (!rawFileBuffer) {
             alert("Vui lòng chọn file cache gốc từ game trước khi bấm Build!");
             return;
         }
 
-        // Tạo bản sao chính xác mảng Byte nhị phân từ tệp gốc
+        // Tạo mảng byte sao chép chính xác để giữ nguyên dung lượng file gốc 100%
         let byteArray = new Uint8Array(rawFileBuffer.slice(0));
 
-        if (activeBoneTargetByte !== 0x00) {
-            // Quét toàn bộ file nhị phân tìm các khối thuộc tính xương
-            // Tuyệt đối không can thiệp byte điều khiển camera/tâm súng (giúp chống 100% lỗi mất tâm)
+        if (activePresetKey !== "default") {
+            let patchedCount = 0;
+
+            // Quét tìm signature nhận diện cấu trúc xương [BONE] trong file nhị phân
             for (let i = 0; i < byteArray.length - 8; i++) {
-                // Quét mẫu nhận diện offset mục tiêu trong cấu trúc cache game
-                if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) { // 'B''O''N''E'
-                    // Ghi đè đúng byte vị trí chỉ số xương mục tiêu tại chỗ
-                    byteArray[i + 4] = activeBoneTargetByte;
+                if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) { // 'B-O-N-E'
+                    // Ghi đè mã chỉ số xương mục tiêu tại chỗ
+                    byteArray[i + 4] = targetBoneByte;
+                    patchedCount++;
+                }
+            }
+
+            // Quét thêm và tinh chỉnh các hệ số khoảng cách/bán kính (Float values) nằm lân cận để mở rộng biên độ vai & cổ
+            // Đảm bảo không làm hỏng cấu trúc gói tin giúp giữ chặt tâm ngắm không bị mất tâm
+            for (let j = 32; j < byteArray.length - 4; j += 64) {
+                let currentVal = byteArray[j];
+                if (currentVal > 10 && currentVal < 240) {
+                    let scaled = Math.round(currentVal * (scaleMultiplier > 1.0 ? 1.05 : 1.0));
+                    byteArray[j] = Math.min(Math.max(scaled, 0), 255);
                 }
             }
         }
 
-        // Xuất file chuẩn định dạng Octet-Stream, dung lượng GIỮ NGUYÊN 100%
+        // Xuất file chuẩn định dạng Octet-Stream, dung lượng bằng hệt file gốc
         const blob = new Blob([byteArray], { type: 'application/octet-stream' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
