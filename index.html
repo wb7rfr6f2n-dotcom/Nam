@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Ultimate Safe Patcher</title>
+    <title>BUILD FILE - Smart Offset Patcher Utility</title>
     <style>
         * {
             box-sizing: border-box;
@@ -143,7 +143,7 @@
             display: none;
         }
 
-        /* Banner khung xương động */
+        /* Banner hiển thị */
         .preview-banner {
             background: radial-gradient(circle at center, #14281c 0%, #101519 100%);
             border: 1px solid #1a3825;
@@ -151,20 +151,6 @@
             padding: 12px;
             text-align: center;
             margin-bottom: 14px;
-            position: relative;
-        }
-
-        .preview-image {
-            height: 110px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 6px;
-            position: relative;
-        }
-
-        .preview-image svg {
-            height: 100%;
         }
 
         .preview-desc {
@@ -173,12 +159,12 @@
             font-weight: 700;
             background-color: rgba(0, 230, 118, 0.15);
             border: 1px solid rgba(0, 230, 118, 0.4);
-            padding: 5px 12px;
+            padding: 6px 12px;
             border-radius: 20px;
             display: inline-block;
         }
 
-        /* Khung chọn file cache gốc */
+        /* Khung chọn file */
         .upload-box {
             background-color: #121824;
             border: 1.5px dashed #00e676;
@@ -207,7 +193,7 @@
             display: none;
         }
 
-        /* Khung log trạng thái */
+        /* Bảng log trạng thái */
         .scanner-log-box {
             background-color: #0d1117;
             border: 1px solid #1e2736;
@@ -221,7 +207,7 @@
             overflow-y: auto;
         }
 
-        /* Danh sách Công Thức */
+        /* Danh sách Công Thức / Chức Năng */
         .section-header {
             font-size: 13px;
             font-weight: 700;
@@ -307,6 +293,39 @@
             display: flex;
         }
 
+        /* Input tùy chỉnh Hex */
+        .custom-config-box {
+            background-color: #141a24;
+            border: 1px solid #1e2736;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 14px;
+        }
+
+        .input-label {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .hex-input {
+            width: 100%;
+            background-color: #0d1117;
+            border: 1px solid #2a3447;
+            color: #00e676;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 11px;
+            outline: none;
+            margin-bottom: 8px;
+        }
+        .hex-input:focus {
+            border-color: #00e676;
+        }
+
         /* Nút Build File */
         .download-btn {
             width: 100%;
@@ -376,9 +395,9 @@
                 <div class="avatar">🎯</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">SAFE FIX</span>
+                        BUILD FILE <span class="free-badge">SMART PATCHER</span>
                     </div>
-                    <div class="subtitle">AIM CỔ & VAI ĐỎ</div>
+                    <div class="subtitle">EXACT OFFSET UTILITY</div>
                 </div>
             </div>
             <div class="status-tags">
@@ -387,32 +406,16 @@
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Smart Patcher)</div>
+        <div class="page-title">Cache_res (Make Cache)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
             
-            <!-- BANNER KHUNG XƯƠNG ĐỘNG -->
-            <div class="preview-banner">
-                <div class="preview-image" id="previewContainer">
-                    <svg viewBox="0 0 120 160" fill="none">
-                        <line x1="60" y1="40" x2="60" y2="115" stroke="#334155" stroke-width="3"/>
-                        <line x1="60" y1="55" x2="35" y2="85" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="60" y1="55" x2="85" y2="85" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="60" y1="115" x2="42" y2="150" stroke="#334155" stroke-width="2.5"/>
-                        <line x1="60" y1="115" x2="78" y2="150" stroke="#334155" stroke-width="2.5"/>
-                        <circle cx="60" cy="24" r="14" stroke="#475569" stroke-width="2"/>
-                        
-                        <g id="targetZone">
-                            <circle cx="60" cy="42" r="13" fill="rgba(0, 230, 118, 0.3)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
-                            <circle cx="60" cy="38" r="3.5" fill="#00e676"/>
-                        </g>
-                    </svg>
-                </div>
-                <div class="preview-desc" id="bannerDesc">🎯 Cổ & Vai Đỏ: Giữ nguyên tâm súng, không văng game</div>
+            <div class="preview-banner" style="text-align: center;">
+                <div class="preview-desc" id="bannerDesc">🛡️ Chọn chức năng và thay đổi offset chính xác an toàn</div>
             </div>
 
-            <!-- KHUNG CHỌN FILE CACHE GỐC -->
+            <!-- KHUNG CHỌN FILE -->
             <label for="realCacheInput" class="upload-box">
                 <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc từ game (.cache / .dat)</div>
                 <div class="upload-desc">Hỗ trợ nạp file từ bộ nhớ máy hoặc ZArchiver</div>
@@ -421,41 +424,59 @@
 
             <!-- KHUNG LOG TRẠNG THÁI -->
             <div class="scanner-log-box" id="scannerLog">
-                [SYSTEM]: Vui lòng chọn tệp cache gốc để kích hoạt nút Build.
+                [SYSTEM]: Vui lòng nạp tệp cache để bắt đầu cấu hình.
             </div>
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng Cố Định Cổ & Vai
+                <span>✨</span> Chọn Chức Năng Cấu Hình Offset
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
-                <!-- Aim Cổ & Vai Đỏ -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ & Vai Đỏ (Strict Neck-Shoulder)', 'Cô lập patch Bone Neck (0x05) - Bảo vệ hoàn toàn tâm súng', 0x05, 60, 42, 13, '🎯 Cổ & Vai Đỏ: Cô lập mã offset xương cổ, bảo vệ tâm súng tuyệt đối')">
+                <!-- Preset 1: Aim Cổ Chuẩn -->
+                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ Chuẩn (Bone Neck)', 'Thay thế mã định danh xương cổ (0x05)', '42 4F 4E 45', '42 4F 4E 05', '🎯 Aim Cổ Chuẩn: Thay thế mã nhận diện Bone Neck (0x05)')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Cổ & Vai Đỏ (Strict Neck-Shoulder)</div>
-                        <div class="preset-sub">Thay đổi đúng byte nhận diện cổ, không chạm vùng HUD</div>
+                        <div class="preset-title">Aim Cổ Chuẩn (Bone Neck)</div>
+                        <div class="preset-sub">Thay đổi byte offset cổ chuẩn xác, giữ nguyên dung lượng</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
-                <!-- Khôi Phục Gốc -->
-                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Clean State)', 'Giữ nguyên 100% byte gốc nguyên bản của game', 0x00, 60, 24, 5, '⚙️ Khôi phục gốc: Đưa tệp về trạng thái chuẩn ban đầu')">
+                <!-- Preset 2: Aim Vai / Ngực -->
+                <div class="preset-card" onclick="selectPreset(this, 'Aim Vai Đỏ (Shoulder Offset)', 'Thay thế mã định danh cấu trúc vai (0x04)', '42 4F 4E 45', '42 4F 4E 04', '🎛️ Aim Vai Đỏ: Tối ưu offset cấu trúc vai và ngực')">
+                    <div class="preset-icon">🎛️</div>
+                    <div class="preset-info">
+                        <div class="preset-title">Aim Vai Đỏ (Shoulder Offset)</div>
+                        <div class="preset-sub">Tối ưu hóa chỉ số offset vùng vai và thân trên</div>
+                    </div>
+                    <div class="check-mark">✓</div>
+                </div>
+
+                <!-- Preset 3: Khôi Phục Gốc -->
+                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Clean File)', 'Giữ nguyên bản 100% byte gốc của tệp', '', '', '⚙️ Khôi phục gốc: Đưa tệp về trạng thái sạch hoàn toàn')">
                     <div class="preset-icon">🔄</div>
                     <div class="preset-info">
-                        <div class="preset-title">Khôi Phục Gốc (Clean State)</div>
-                        <div class="preset-sub">Hoàn trả toàn bộ tệp cache về nguyên bản 100%</div>
+                        <div class="preset-title">Khôi Phục Gốc (Clean File)</div>
+                        <div class="preset-sub">Hoàn trả tệp cache về nguyên bản ban đầu</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
             </div>
 
+            <!-- TÙY CHỈNH HEX NÂNG CAO -->
+            <div class="custom-config-box">
+                <label class="input-label">MÃ TÌM KIẾM (SEARCH HEX):</label>
+                <input type="text" id="searchHex" class="hex-input" value="42 4F 4E 45">
+                <label class="input-label">MÃ THAY THẾ (REPLACE HEX):</label>
+                <input type="text" id="replaceHex" class="hex-input" value="42 4F 4E 05">
+            </div>
+
             <!-- NÚT BUILD FILE -->
-            <button id="buildBtn" class="download-btn" onclick="runUltimateSafePatch()">⚡ VUI LÒNG CHỌN FILE ĐỂ BUILD</button>
+            <button id="buildBtn" class="download-btn" onclick="executeOffsetPatch()">⚡ VUI LÒNG CHỌN FILE ĐỂ BUILD</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -486,9 +507,8 @@
 <script>
     let rawFileBuffer = null;
     let originalFileName = "Cache_res.cache";
-    let targetBoneByte = 0x05; // Mặc định Aim Cổ (0x05)
 
-    // 1. ĐỌC FILE CACHE GỐC THUẦN TÚY (ArrayBuffer)
+    // 1. ĐỌC FILE CACHE GỐC
     function loadRealGameCache(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -501,7 +521,7 @@
         reader.onload = function(e) {
             rawFileBuffer = e.target.result;
             
-            // Mở khóa nút Build ngay khi nạp file xong
+            // Kích hoạt nút Build
             const btn = document.getElementById('buildBtn');
             btn.classList.add('active-btn');
             btn.innerText = "⚡ BUILD & XUẤT FILE CACHE AN TOÀN";
@@ -509,66 +529,78 @@
         reader.readAsArrayBuffer(file);
     }
 
-    // 2. CHỌN CHỨC NĂNG & ĐỔI VỊ TRÍ VÒNG ĐỎ MỤC TIÊU
-    function selectPreset(element, name, sub, boneByte, cx, cy, circleRadius, bannerText) {
+    // 2. CHỌN CHỨC NĂNG PRESET
+    function selectPreset(element, name, sub, searchHexVal, replaceHexVal, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => card.classList.remove('active'));
         element.classList.add('active');
         
-        targetBoneByte = boneByte;
-
-        const targetZone = document.getElementById('targetZone');
-        targetZone.innerHTML = `
-            <circle cx="${cx}" cy="${cy}" r="${circleRadius}" fill="rgba(0, 230, 118, 0.3)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
-            <circle cx="${cx}" cy="${cy}" r="3.5" fill="#00e676"/>
-        `;
+        document.getElementById('searchHex').value = searchHexVal;
+        document.getElementById('replaceHex').value = replaceHexVal;
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. THUẬT TOÁN PATCH AN TOÀN - ĐẢM BẢO LUÔN XUẤT FILE THÀNH CÔNG
-    function runUltimateSafePatch() {
+    // Chuyển đổi Hex String thành Uint8Array
+    function parseHex(str) {
+        let clean = str.replace(/\s+/g, '');
+        if (clean.length % 2 !== 0) clean = '0' + clean;
+        let arr = new Uint8Array(clean.length / 2);
+        for (let i = 0; i < clean.length; i += 2) {
+            arr[i / 2] = parseInt(clean.substr(i, 2), 16);
+        }
+        return arr;
+    }
+
+    // 3. THUẬT TOÁN PATCH OFFSET CHÍNH XÁC (Exact Match)
+    function executeOffsetPatch() {
         if (!rawFileBuffer) {
             alert("Vui lòng chọn file cache gốc trước khi bấm Build!");
             return;
         }
 
         let logBox = document.getElementById('scannerLog');
-        logBox.innerHTML = "[PROCESS]: Đang xử lý tệp an toàn...";
+        let searchStr = document.getElementById('searchHex').value.trim();
+        let replaceStr = document.getElementById('replaceHex').value.trim();
 
-        // Tạo mảng byte sao chép chính xác từ file gốc (Giữ nguyên dung lượng 100%)
         let byteArray = new Uint8Array(rawFileBuffer.slice(0));
 
-        if (targetBoneByte !== 0x00) {
-            let patchedCount = 0;
+        if (searchStr === "" || replaceStr === "") {
+            logBox.innerHTML = `[INFO]: Giữ nguyên trạng thái gốc của tệp.`;
+        } else {
+            try {
+                let searchBytes = parseHex(searchStr);
+                let replaceBytes = parseHex(replaceStr);
 
-            // Lớp 1: Quét tìm chuỗi Signature "BONE"
-            for (let i = 0; i < byteArray.length - 8; i++) {
-                if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) {
-                    byteArray[i + 4] = targetBoneByte;
-                    patchedCount++;
+                if (searchBytes.length !== replaceBytes.length) {
+                    alert("Độ dài mã Tìm kiếm và Thay thế phải bằng nhau để giữ nguyên cấu trúc tệp!");
+                    return;
                 }
-            }
 
-            // Lớp 2 (Smart Fallback): Nếu tệp không chứa chuỗi BONE cứng, AI sẽ patch chọn lọc ở phần thân tệp (tránh 512 byte đầu/cuối của HUD)
-            if (patchedCount === 0) {
-                let startPos = Math.floor(byteArray.length * 0.25);
-                let endPos = Math.floor(byteArray.length * 0.75);
-                
-                for (let k = startPos; k < endPos; k += 128) {
-                    if (byteArray[k] > 0 && byteArray[k] < 20) {
-                        byteArray[k] = targetBoneByte;
-                        patchedCount++;
-                        if (patchedCount >= 15) break;
+                let matchCount = 0;
+                for (let i = 0; i <= byteArray.length - searchBytes.length; i++) {
+                    let found = true;
+                    for (let j = 0; j < searchBytes.length; j++) {
+                        if (byteArray[i + j] !== searchBytes[j]) {
+                            found = false;
+                            break;
+                        }
+                    }
+                    if (found) {
+                        for (let j = 0; j < replaceBytes.length; j++) {
+                            byteArray[i + j] = replaceBytes[j];
+                        }
+                        matchCount++;
+                        i += searchBytes.length - 1;
                     }
                 }
-                logBox.innerHTML = `[SUCCESS]: Đã áp dụng Smart Fallback (${patchedCount} điểm). Tâm súng được bảo vệ tuyệt đối!`;
-            } else {
-                logBox.innerHTML = `[SUCCESS]: Đã patch chính xác ${patchedCount} điểm xương BONE. Tâm súng nguyên vẹn!`;
+
+                logBox.innerHTML = `[SUCCESS]: Đã thay thế thành công ${matchCount} vị trí offset. Kích thước tệp giữ nguyên 100%!`;
+            } catch (err) {
+                logBox.innerHTML = `[ERROR]: Lỗi định dạng mã Hex (${err.message}).`;
+                return;
             }
-        } else {
-            logBox.innerHTML = `[INFO]: Giữ nguyên trạng thái gốc của tệp.`;
         }
 
-        // KÍCH HOẠT TẢI XUỐNG TỆP NGAY LẬP TỨC
+        // Tải xuống tệp đã xử lý
         const blob = new Blob([byteArray], { type: 'application/octet-stream' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
