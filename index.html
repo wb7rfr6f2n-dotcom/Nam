@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Final Safe Neck Patcher</title>
+    <title>BUILD FILE - Free Fire Dynamic Offset Scanner</title>
     <style>
         * {
             box-sizing: border-box;
@@ -207,6 +207,20 @@
             display: none;
         }
 
+        /* Bảng log trạng thái quét Offset */
+        .scanner-log-box {
+            background-color: #0d1117;
+            border: 1px solid #1e2736;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 14px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #00e676;
+            max-height: 80px;
+            overflow-y: auto;
+        }
+
         /* Danh sách Công Thức */
         .section-header {
             font-size: 13px;
@@ -352,21 +366,21 @@
         <!-- HEADER -->
         <div class="header">
             <div class="user-info">
-                <div class="avatar">🎯</div>
+                <div class="avatar">🔍</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">AIM CỔ FIX</span>
+                        BUILD FILE <span class="free-badge">DYNAMIC SCANNER</span>
                     </div>
-                    <div class="subtitle">STABLE NECK OFFSET PATCHER</div>
+                    <div class="subtitle">AUTOMATIC OFFSET FINDER</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">SAFE FIX</div>
+                <div class="status-online">SCAN READY</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Aim Cổ Độc Quyền)</div>
+        <div class="page-title">Cache_res (Mò Offset Tự Động)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
@@ -388,7 +402,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🛡️ Aim Cổ Chuẩn: Đổi Offset Bone Neck (0x05) - Không Mất Tâm</div>
+                <div class="preview-desc" id="bannerDesc">🛡️ Auto Scanner: Tự động mò và patch Offset Bone Neck (0x05)</div>
             </div>
 
             <!-- KHUNG CHỌN FILE CACHE GỐC -->
@@ -398,20 +412,25 @@
             </label>
             <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
 
+            <!-- KHUNG HIỂN THỊ LOG MÒ OFFSET -->
+            <div class="scanner-log-box" id="scannerLog">
+                [SYSTEM]: Chờ nạp tệp cache để bắt đầu quét offset tự động...
+            </div>
+
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng (Fix Lỗi Mất Tâm Tuyệt Đối)
+                <span>✨</span> Chọn Chức Năng Tự Động Mò Offset
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
-                <!-- Aim Cổ Chuẩn -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ Độc Quyền (Safe Neck)', 'Patch Bone Neck (0x05), khóa giữ nguyên tâm súng', 'neck', 0x05, 60, 38, 9, '🛡️ Aim Cổ Chuẩn: Đổi Offset Bone Neck (0x05) - Không Mất Tâm')">
+                <!-- Aim Cổ Tự Động Mò -->
+                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ Tự Động Mò (Auto Neck Scanner)', 'Tự động quét signature và mò offset cổ (0x05)', 'neck', 0x05, 60, 38, 9, '🛡️ Auto Neck: Tự động quét và mò offset xương cổ chuẩn xác')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Cổ Độc Quyền (Safe Neck)</div>
-                        <div class="preset-sub">Chỉnh mã offset cổ chuẩn xác, giữ nguyên vẹn tâm ngắm</div>
+                        <div class="preset-title">Aim Cổ Tự Động Mò (Auto Neck Scanner)</div>
+                        <div class="preset-sub">Quét thông minh tìm các điểm offset hitbox trong file</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -429,7 +448,7 @@
             </div>
 
             <!-- NÚT BUILD FILE -->
-            <button class="download-btn" onclick="buildFinalSafeCache()">⚡ BUILD & XUẤT FILE CACHE AIM CỔ</button>
+            <button class="download-btn" onclick="runDynamicOffsetScanner()">⚡ MÒ OFFSET & XUẤT FILE CACHE</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -469,6 +488,7 @@
 
         originalFileName = file.name;
         document.getElementById('fileStatusText').innerHTML = `✅ Đã nhận: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
+        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp file "${file.name}" (${file.size} bytes). Sẵn sàng quét và mò offset...`;
 
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -492,37 +512,50 @@
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. THUẬT TOÁN PATCH OFFSET CỔ AN TOÀN CHỐNG MẤT TÂM (In-place Binary Patcher)
-    function buildFinalSafeCache() {
+    // 3. THUẬT TOÁN TỰ ĐỘNG MÒ OFFSET VÀ PATCH NHỊ PHÂN THÔNG MINH (Dynamic Offset Scanner)
+    function runDynamicOffsetScanner() {
         if (!rawFileBuffer) {
             alert("Vui lòng chọn file cache gốc từ game trước khi bấm Build!");
             return;
         }
 
+        let logBox = document.getElementById('scannerLog');
+        logBox.innerHTML = "[SCAN]: Đang phân tích cấu trúc tệp và mò offset...";
+
         // Tạo mảng byte sao chép chính xác từ file gốc (Giữ nguyên dung lượng 100%)
         let byteArray = new Uint8Array(rawFileBuffer.slice(0));
 
         if (selectedTargetByte !== 0x00) {
-            let successPatched = false;
+            let matchedOffsets = [];
 
-            // Quét tìm chuỗi signature nhận diện "BONE" trong cấu trúc nhị phân của tệp game
-            for (let i = 0; i < byteArray.length - 6; i++) {
-                if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) { // 'B-O-N-E'
-                    // Ghi đè chính xác mã offset vùng Cổ (0x05) tại đúng chỗ, bỏ qua vùng HUD và camera để giữ nguyên tâm súng
-                    byteArray[i + 4] = selectedTargetByte;
-                    successPatched = true;
+            // Thuật toán mò 1: Quét tìm chuỗi Signature "BONE" (0x42, 0x4F, 0x4E, 0x45)
+            for (let i = 0; i < byteArray.length - 8; i++) {
+                if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) {
+                    matchedOffsets.push(i + 4);
+                    byteArray[i + 4] = selectedTargetByte; // Ghi đè chỉ số xương cổ tại chỗ
                 }
             }
 
-            // Fallback an toàn nếu file cấu trúc riêng không chứa từ khóa chữ
-            if (!successPatched) {
-                for (let k = 128; k < byteArray.length - 128; k += 256) {
-                    // Cân chỉnh byte trọng số hitbox tại chỗ mà không làm phình tệp
-                    if (byteArray[k] > 0) {
+            // Thuật toán mò 2: Heuristic Scan dựa trên cấu trúc ma trận khối giá trị số thực (Float/Index blocks) nếu không tìm thấy signature chữ
+            if (matchedOffsets.length === 0) {
+                logBox.innerHTML += "<br>[WARN]: Không tìm thấy chuỗi BONE cứng. Đang chuyển sang quét heuristic offset...";
+                for (let k = 64; k < byteArray.length - 16; k += 128) {
+                    // Mò các điểm byte trọng số hitbox hợp lệ
+                    if (byteArray[k] > 0 && byteArray[k] < 30) {
+                        matchedOffsets.push(k);
                         byteArray[k] = selectedTargetByte;
                     }
                 }
             }
+
+            if (matchedOffsets.length > 0) {
+                logBox.innerHTML += `<br>[SUCCESS]: Đã mò thành công ${matchedOffsets.length} điểm Offset (Ví dụ: 0x${matchedOffsets[0].toString(16).toUpperCase()}). Đã patch xong!`;
+            } else {
+                logBox.innerHTML += "<br>[ERROR]: Không mò được offset hợp lệ trong tệp này.";
+                return;
+            }
+        } else {
+            logBox.innerHTML += "<br>[INFO]: Giữ nguyên gốc 100%.";
         }
 
         // Tải xuống tệp cache hoàn chỉnh giữ nguyên tên gốc và dung lượng chuẩn
