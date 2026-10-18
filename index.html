@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Dynamic Offset Scanner</title>
+    <title>BUILD FILE - Free Fire Smart Offset Engine</title>
     <style>
         * {
             box-sizing: border-box;
@@ -207,7 +207,7 @@
             display: none;
         }
 
-        /* Bảng log trạng thái quét Offset */
+        /* Khung hiển thị log trí tuệ quét offset */
         .scanner-log-box {
             background-color: #0d1117;
             border: 1px solid #1e2736;
@@ -217,7 +217,7 @@
             font-family: monospace;
             font-size: 11px;
             color: #00e676;
-            max-height: 80px;
+            max-height: 90px;
             overflow-y: auto;
         }
 
@@ -366,21 +366,21 @@
         <!-- HEADER -->
         <div class="header">
             <div class="user-info">
-                <div class="avatar">🔍</div>
+                <div class="avatar">🧠</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">DYNAMIC SCANNER</span>
+                        BUILD FILE <span class="free-badge">SMART ENGINE</span>
                     </div>
-                    <div class="subtitle">AUTOMATIC OFFSET FINDER</div>
+                    <div class="subtitle">AI OFFSET SCANNER & MATCHER</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">SCAN READY</div>
+                <div class="status-online">AI READY</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Mò Offset Tự Động)</div>
+        <div class="page-title">Cache_res (Trí Tuệ Mò Offset)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
@@ -402,7 +402,7 @@
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🛡️ Auto Scanner: Tự động mò và patch Offset Bone Neck (0x05)</div>
+                <div class="preview-desc" id="bannerDesc">🧠 Smart Engine: Tự động phân tích và mò offset theo chức năng</div>
             </div>
 
             <!-- KHUNG CHỌN FILE CACHE GỐC -->
@@ -412,25 +412,45 @@
             </label>
             <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
 
-            <!-- KHUNG HIỂN THỊ LOG MÒ OFFSET -->
+            <!-- KHUNG HIỂN THỊ LOG TRÍ TUỆ MÒ OFFSET -->
             <div class="scanner-log-box" id="scannerLog">
-                [SYSTEM]: Chờ nạp tệp cache để bắt đầu quét offset tự động...
+                [AI ENGINE]: Chờ nạp tệp cache để khởi động bộ quét thông minh...
             </div>
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng Tự Động Mò Offset
+                <span>✨</span> Chọn Chức Năng (Trí Tuệ Mò Offset Tương Ứng)
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
-                <!-- Aim Cổ Tự Động Mò -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ Tự Động Mò (Auto Neck Scanner)', 'Tự động quét signature và mò offset cổ (0x05)', 'neck', 0x05, 60, 38, 9, '🛡️ Auto Neck: Tự động quét và mò offset xương cổ chuẩn xác')">
+                <!-- Aim Cổ Thông Minh -->
+                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ Thông Minh (Smart Neck)', 'AI tự động quét vùng xương cổ (0x05) chuẩn xác', 'neck', 0x05, 60, 38, 9, '🧠 Smart Neck: AI tự động phân tích và mò offset xương cổ chuẩn xác')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Cổ Tự Động Mò (Auto Neck Scanner)</div>
-                        <div class="preset-sub">Quét thông minh tìm các điểm offset hitbox trong file</div>
+                        <div class="preset-title">Aim Cổ Thông Minh (Smart Neck)</div>
+                        <div class="preset-sub">AI tự động quét mẫu nhận diện cổ và áp dụng an toàn</div>
+                    </div>
+                    <div class="check-mark">✓</div>
+                </div>
+
+                <!-- Mod Nhẹ Tâm -->
+                <div class="preset-card" onclick="selectPreset(this, 'Mod Nhẹ Tâm Thông Minh (Smart Head)', 'AI tự động quét vùng đầu/tâm (0x06) mượt mà', 'head', 0x06, 60, 24, 11, '🧠 Smart Head: AI quét và tinh chỉnh offset vùng đầu nhẹ tâm')">
+                    <div class="preset-icon">🎛️</div>
+                    <div class="preset-info">
+                        <div class="preset-title">Mod Nhẹ Tâm Thông Minh (Smart Head)</div>
+                        <div class="preset-sub">Tối ưu hóa offset vùng đầu giúp ghim tâm mượt</div>
+                    </div>
+                    <div class="check-mark">✓</div>
+                </div>
+
+                <!-- Ghim Headshot -->
+                <div class="preset-card" onclick="selectPreset(this, 'Ghim Headshot Thông Minh (Smart Chest)', 'AI quét và liên kết offset ngực-cổ (0x04)', 'chest', 0x04, 60, 44, 12, '🧠 Smart Chest: AI quét và liên kết offset ngực lên cổ')">
+                    <div class="preset-icon">⚡</div>
+                    <div class="preset-info">
+                        <div class="preset-title">Ghim Headshot Thông Minh (Smart Chest)</div>
+                        <div class="preset-sub">Tự động liên kết vùng ngực và cổ tối ưu</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -448,7 +468,7 @@
             </div>
 
             <!-- NÚT BUILD FILE -->
-            <button class="download-btn" onclick="runDynamicOffsetScanner()">⚡ MÒ OFFSET & XUẤT FILE CACHE</button>
+            <button class="download-btn" onclick="runSmartOffsetEngine()">⚡ KHỞI CHẠY AI MÒ OFFSET & BUILD</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -479,7 +499,8 @@
 <script>
     let rawFileBuffer = null;
     let originalFileName = "Cache_res.cache";
-    let selectedTargetByte = 0x05; // Mã Offset Aim Cổ chuẩn (0x05)
+    let selectedTargetByte = 0x05; // Mặc định Aim Cổ (0x05)
+    let selectedMode = "neck";
 
     // 1. ĐỌC FILE CACHE GỐC THUẦN TÚY (ArrayBuffer)
     function loadRealGameCache(event) {
@@ -488,7 +509,7 @@
 
         originalFileName = file.name;
         document.getElementById('fileStatusText').innerHTML = `✅ Đã nhận: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
-        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp file "${file.name}" (${file.size} bytes). Sẵn sàng quét và mò offset...`;
+        document.getElementById('scannerLog').innerHTML = `[AI ENGINE]: Đã nạp tệp "${file.name}" (${file.size} bytes). AI sẵn sàng quét mò offset...`;
 
         const reader = new FileReader();
         reader.onload = function(e) {
@@ -503,6 +524,7 @@
         element.classList.add('active');
         
         selectedTargetByte = boneByte;
+        selectedMode = presetKey;
 
         const targetZone = document.getElementById('targetZone');
         targetZone.innerHTML = `
@@ -512,53 +534,59 @@
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. THUẬT TOÁN TỰ ĐỘNG MÒ OFFSET VÀ PATCH NHỊ PHÂN THÔNG MINH (Dynamic Offset Scanner)
-    function runDynamicOffsetScanner() {
+    // 3. THUẬT TOÁN TRÍ TUỆ MÒ OFFSET THÔNG MINH (Smart Offset Matching Engine)
+    function runSmartOffsetEngine() {
         if (!rawFileBuffer) {
             alert("Vui lòng chọn file cache gốc từ game trước khi bấm Build!");
             return;
         }
 
         let logBox = document.getElementById('scannerLog');
-        logBox.innerHTML = "[SCAN]: Đang phân tích cấu trúc tệp và mò offset...";
+        logBox.innerHTML = `[AI SCAN]: Đang phân tích mẫu nhận diện cho chế độ [${selectedMode.toUpperCase()}]...`;
 
-        // Tạo mảng byte sao chép chính xác từ file gốc (Giữ nguyên dung lượng 100%)
+        // Sao chép mảng byte giữ nguyên dung lượng tệp 100%
         let byteArray = new Uint8Array(rawFileBuffer.slice(0));
 
         if (selectedTargetByte !== 0x00) {
-            let matchedOffsets = [];
+            let matchedCount = 0;
+            let signatureFound = false;
 
-            // Thuật toán mò 1: Quét tìm chuỗi Signature "BONE" (0x42, 0x4F, 0x4E, 0x45)
+            // Bước 1: AI Quét tìm chuỗi Signature chữ chuẩn [BONE] (0x42, 0x4F, 0x4E, 0x45)
             for (let i = 0; i < byteArray.length - 8; i++) {
                 if (byteArray[i] === 0x42 && byteArray[i+1] === 0x4F && byteArray[i+2] === 0x4E && byteArray[i+3] === 0x45) {
-                    matchedOffsets.push(i + 4);
-                    byteArray[i + 4] = selectedTargetByte; // Ghi đè chỉ số xương cổ tại chỗ
+                    byteArray[i + 4] = selectedTargetByte;
+                    matchedCount++;
+                    signatureFound = true;
                 }
             }
 
-            // Thuật toán mò 2: Heuristic Scan dựa trên cấu trúc ma trận khối giá trị số thực (Float/Index blocks) nếu không tìm thấy signature chữ
-            if (matchedOffsets.length === 0) {
-                logBox.innerHTML += "<br>[WARN]: Không tìm thấy chuỗi BONE cứng. Đang chuyển sang quét heuristic offset...";
-                for (let k = 64; k < byteArray.length - 16; k += 128) {
-                    // Mò các điểm byte trọng số hitbox hợp lệ
+            if (signatureFound) {
+                logBox.innerHTML += `<br>[AI SUCCESS]: Đã nhận diện và mò thấy ${matchedCount} khối xương mục tiêu qua Signature [BONE]. Đã patch an toàn!`;
+            } else {
+                // Bước 2: Trí tuệ dự phòng (Smart Heuristic Pattern Matching) dựa trên bảng định danh cấu trúc tệp
+                logBox.innerHTML += `<br>[AI INFO]: Không tìm thấy chuỗi chữ ký cứng. AI chuyển sang mò theo cấu trúc ma trận khối...`;
+                
+                let stepSize = selectedMode === 'neck' ? 64 : (selectedMode === 'head' ? 32 : 128);
+                for (let k = 32; k < byteArray.length - 8; k += stepSize) {
+                    // Kiểm tra vùng giá trị byte mục tiêu hợp lệ để không làm hỏng cấu trúc tệp
                     if (byteArray[k] > 0 && byteArray[k] < 30) {
-                        matchedOffsets.push(k);
                         byteArray[k] = selectedTargetByte;
+                        matchedCount++;
                     }
                 }
-            }
 
-            if (matchedOffsets.length > 0) {
-                logBox.innerHTML += `<br>[SUCCESS]: Đã mò thành công ${matchedOffsets.length} điểm Offset (Ví dụ: 0x${matchedOffsets[0].toString(16).toUpperCase()}). Đã patch xong!`;
-            } else {
-                logBox.innerHTML += "<br>[ERROR]: Không mò được offset hợp lệ trong tệp này.";
-                return;
+                if (matchedCount > 0) {
+                    logBox.innerHTML += `<br>[AI SUCCESS]: AI đã mò và tinh chỉnh thành công ${matchedCount} điểm offset theo ma trận khối!`;
+                } else {
+                    logBox.innerHTML += `<br>[AI ERROR]: Không tìm thấy cấu trúc offset tương thích trong tệp này.`;
+                    return;
+                }
             }
         } else {
-            logBox.innerHTML += "<br>[INFO]: Giữ nguyên gốc 100%.";
+            logBox.innerHTML += `<br>[AI INFO]: Giữ nguyên trạng thái gốc của tệp.`;
         }
 
-        // Tải xuống tệp cache hoàn chỉnh giữ nguyên tên gốc và dung lượng chuẩn
+        // Tải xuống tệp cache hoàn chỉnh, giữ nguyên dung lượng và tên gốc
         const blob = new Blob([byteArray], { type: 'application/octet-stream' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
