@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Smart Offset Patcher Utility</title>
+    <title>Auto Offset Patcher - Smart Web Utility</title>
     <style>
         * {
             box-sizing: border-box;
@@ -203,7 +203,7 @@
             font-family: monospace;
             font-size: 11px;
             color: #00e676;
-            max-height: 90px;
+            max-height: 110px;
             overflow-y: auto;
         }
 
@@ -293,39 +293,6 @@
             display: flex;
         }
 
-        /* Input tùy chỉnh Hex */
-        .custom-config-box {
-            background-color: #141a24;
-            border: 1px solid #1e2736;
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 14px;
-        }
-
-        .input-label {
-            font-size: 11px;
-            color: #94a3b8;
-            margin-bottom: 6px;
-            display: block;
-            font-weight: bold;
-        }
-
-        .hex-input {
-            width: 100%;
-            background-color: #0d1117;
-            border: 1px solid #2a3447;
-            color: #00e676;
-            padding: 8px 10px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 11px;
-            outline: none;
-            margin-bottom: 8px;
-        }
-        .hex-input:focus {
-            border-color: #00e676;
-        }
-
         /* Nút Build File */
         .download-btn {
             width: 100%;
@@ -392,91 +359,73 @@
         <!-- HEADER -->
         <div class="header">
             <div class="user-info">
-                <div class="avatar">🎯</div>
+                <div class="avatar">🚀</div>
                 <div>
                     <div class="brand-title">
-                        BUILD FILE <span class="free-badge">SMART PATCHER</span>
+                        AUTO PATCHER <span class="free-badge">HTML JS</span>
                     </div>
-                    <div class="subtitle">EXACT OFFSET UTILITY</div>
+                    <div class="subtitle">SMART BINARY SCANNER</div>
                 </div>
             </div>
             <div class="status-tags">
-                <div class="status-online">READY</div>
+                <div class="status-online">AUTO</div>
                 <div class="country-flag">🇻🇳 VN</div>
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Make Cache)</div>
+        <div class="page-title">Cache_res (Auto Make)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
             
             <div class="preview-banner" style="text-align: center;">
-                <div class="preview-desc" id="bannerDesc">🛡️ Chọn chức năng và thay đổi offset chính xác an toàn</div>
+                <div class="preview-desc" id="bannerDesc">⚡ Chọn chế độ, ứng dụng sẽ tự động mò và thay thế offset</div>
             </div>
 
             <!-- KHUNG CHỌN FILE -->
             <label for="realCacheInput" class="upload-box">
-                <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc từ game (.cache / .dat)</div>
-                <div class="upload-desc">Hỗ trợ nạp file từ bộ nhớ máy hoặc ZArchiver</div>
+                <div class="upload-title" id="fileStatusText">📁 Chọn file cache gốc (.cache / .dat)</div>
+                <div class="upload-desc">Tự động nạp và quét dữ liệu nhị phân trực tiếp trên web</div>
             </label>
             <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
 
             <!-- KHUNG LOG TRẠNG THÁI -->
             <div class="scanner-log-box" id="scannerLog">
-                [SYSTEM]: Vui lòng nạp tệp cache để bắt đầu cấu hình.
+                [SYSTEM]: Trạng thái chờ nạp tệp...
             </div>
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Chọn Chức Năng Cấu Hình Offset
+                <span>✨</span> Chọn Chế Độ Tự Động Quét
             </div>
 
-            <!-- LIST PRESETS -->
+            <!-- LIST PRESETS (Tự động định nghĩa sẵn mã tìm kiếm & thay thế ngầm) -->
             <div id="presetList">
                 
-                <!-- Preset 1: Aim Cổ Chuẩn -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ Chuẩn (Bone Neck)', 'Thay thế mã định danh xương cổ (0x05)', '42 4F 4E 45', '42 4F 4E 05', '🎯 Aim Cổ Chuẩn: Thay thế mã nhận diện Bone Neck (0x05)')">
+                <!-- Chế độ 1: Tự động tìm & thay thế cấu trúc Bone Neck -->
+                <div class="preset-card active" onclick="selectAutoMode(this, '42 4F 4E 45', '42 4F 4E 05', '🎯 Tự động quét và tối ưu hóa mã nhận diện Cổ (Bone Neck)')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Cổ Chuẩn (Bone Neck)</div>
-                        <div class="preset-sub">Thay đổi byte offset cổ chuẩn xác, giữ nguyên dung lượng</div>
+                        <div class="preset-title">Auto Scan: Bone Neck</div>
+                        <div class="preset-sub">Tự động tìm kiếm mã định danh cũ và ghi đè giá trị tối ưu</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
-                <!-- Preset 2: Aim Vai / Ngực -->
-                <div class="preset-card" onclick="selectPreset(this, 'Aim Vai Đỏ (Shoulder Offset)', 'Thay thế mã định danh cấu trúc vai (0x04)', '42 4F 4E 45', '42 4F 4E 04', '🎛️ Aim Vai Đỏ: Tối ưu offset cấu trúc vai và ngực')">
+                <!-- Chế độ 2: Tự động tìm & thay thế cấu trúc Shoulder -->
+                <div class="preset-card" onclick="selectAutoMode(this, '42 4F 4E 45', '42 4F 4E 04', '🎛️ Tự động quét và tối ưu hóa mã nhận diện Vai (Shoulder)')">
                     <div class="preset-icon">🎛️</div>
                     <div class="preset-info">
-                        <div class="preset-title">Aim Vai Đỏ (Shoulder Offset)</div>
-                        <div class="preset-sub">Tối ưu hóa chỉ số offset vùng vai và thân trên</div>
-                    </div>
-                    <div class="check-mark">✓</div>
-                </div>
-
-                <!-- Preset 3: Khôi Phục Gốc -->
-                <div class="preset-card" onclick="selectPreset(this, 'Khôi Phục Gốc (Clean File)', 'Giữ nguyên bản 100% byte gốc của tệp', '', '', '⚙️ Khôi phục gốc: Đưa tệp về trạng thái sạch hoàn toàn')">
-                    <div class="preset-icon">🔄</div>
-                    <div class="preset-info">
-                        <div class="preset-title">Khôi Phục Gốc (Clean File)</div>
-                        <div class="preset-sub">Hoàn trả tệp cache về nguyên bản ban đầu</div>
+                        <div class="preset-title">Auto Scan: Shoulder Offset</div>
+                        <div class="preset-sub">Tự động quét cấu trúc thân trên và vai</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
 
             </div>
 
-            <!-- TÙY CHỈNH HEX NÂNG CAO -->
-            <div class="custom-config-box">
-                <label class="input-label">MÃ TÌM KIẾM (SEARCH HEX):</label>
-                <input type="text" id="searchHex" class="hex-input" value="42 4F 4E 45">
-                <label class="input-label">MÃ THAY THẾ (REPLACE HEX):</label>
-                <input type="text" id="replaceHex" class="hex-input" value="42 4F 4E 05">
-            </div>
-
-            <!-- NÚT BUILD FILE -->
-            <button id="buildBtn" class="download-btn" onclick="executeOffsetPatch()">⚡ VUI LÒNG CHỌN FILE ĐỂ BUILD</button>
+            <!-- NÚT BUILD FILE TỰ ĐỘNG -->
+            <button id="buildBtn" class="download-btn" onclick="executeAutoPatch()">⚡ TỰ ĐỘNG QUÉT & XUẤT TỆP</button>
         </div>
 
         <!-- BOTTOM NAVIGATION -->
@@ -507,35 +456,39 @@
 <script>
     let rawFileBuffer = null;
     let originalFileName = "Cache_res.cache";
+    
+    // Biến lưu mã tìm kiếm và thay thế ngầm định (không cần bảng nhập thủ công)
+    let currentSearchHex = "42 4F 4E 45";
+    let currentReplaceHex = "42 4F 4E 05";
 
-    // 1. ĐỌC FILE CACHE GỐC
+    // 1. ĐỌC FILE GỐC TỰ ĐỘNG
     function loadRealGameCache(event) {
         const file = event.target.files[0];
         if (!file) return;
 
         originalFileName = file.name;
         document.getElementById('fileStatusText').innerHTML = `✅ Đã nhận: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
-        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp tệp "${file.name}" (${file.size} bytes). Sẵn sàng Build!`;
+        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp thành công "${file.name}" (${file.size} bytes). Sẵn sàng chạy quét tự động!`;
 
         const reader = new FileReader();
         reader.onload = function(e) {
             rawFileBuffer = e.target.result;
             
-            // Kích hoạt nút Build
+            // Kích hoạt nút chạy
             const btn = document.getElementById('buildBtn');
             btn.classList.add('active-btn');
-            btn.innerText = "⚡ BUILD & XUẤT FILE CACHE AN TOÀN";
+            btn.innerText = "⚡ TỰ ĐỘNG QUÉT & XUẤT TỆP NGAY";
         };
         reader.readAsArrayBuffer(file);
     }
 
-    // 2. CHỌN CHỨC NĂNG PRESET
-    function selectPreset(element, name, sub, searchHexVal, replaceHexVal, bannerText) {
+    // 2. CHỌN CHẾ ĐỘ TỰ ĐỘNG
+    function selectAutoMode(element, searchVal, replaceVal, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => card.classList.remove('active'));
         element.classList.add('active');
         
-        document.getElementById('searchHex').value = searchHexVal;
-        document.getElementById('replaceHex').value = replaceHexVal;
+        currentSearchHex = searchVal;
+        currentReplaceHex = replaceVal;
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
@@ -550,32 +503,25 @@
         return arr;
     }
 
-    // 3. THUẬT TOÁN PATCH OFFSET CHÍNH XÁC (Exact Match)
-    function executeOffsetPatch() {
+    // 3. THUẬT TOÁN TỰ ĐỘNG TÌM KIẾM & THAY THẾ (Auto Scan & Patch)
+    function executeAutoPatch() {
         if (!rawFileBuffer) {
-            alert("Vui lòng chọn file cache gốc trước khi bấm Build!");
+            alert("Vui lòng chọn file cache gốc trước khi bấm nút!");
             return;
         }
 
         let logBox = document.getElementById('scannerLog');
-        let searchStr = document.getElementById('searchHex').value.trim();
-        let replaceStr = document.getElementById('replaceHex').value.trim();
+        logBox.innerHTML = `[SCANNING]: Đang tự động quét toàn bộ mảng byte trong tệp...`;
 
-        let byteArray = new Uint8Array(rawFileBuffer.slice(0));
+        setTimeout(() => {
+            let byteArray = new Uint8Array(rawFileBuffer.slice(0));
 
-        if (searchStr === "" || replaceStr === "") {
-            logBox.innerHTML = `[INFO]: Giữ nguyên trạng thái gốc của tệp.`;
-        } else {
             try {
-                let searchBytes = parseHex(searchStr);
-                let replaceBytes = parseHex(replaceStr);
-
-                if (searchBytes.length !== replaceBytes.length) {
-                    alert("Độ dài mã Tìm kiếm và Thay thế phải bằng nhau để giữ nguyên cấu trúc tệp!");
-                    return;
-                }
+                let searchBytes = parseHex(currentSearchHex);
+                let replaceBytes = parseHex(currentReplaceHex);
 
                 let matchCount = 0;
+                // Vòng lặp tự động mò mẫm khớp mẫu (Pattern Matching)
                 for (let i = 0; i <= byteArray.length - searchBytes.length; i++) {
                     let found = true;
                     for (let j = 0; j < searchBytes.length; j++) {
@@ -593,21 +539,21 @@
                     }
                 }
 
-                logBox.innerHTML = `[SUCCESS]: Đã thay thế thành công ${matchCount} vị trí offset. Kích thước tệp giữ nguyên 100%!`;
-            } catch (err) {
-                logBox.innerHTML = `[ERROR]: Lỗi định dạng mã Hex (${err.message}).`;
-                return;
-            }
-        }
+                logBox.innerHTML = `[SUCCESS]: Đã tự động tìm thấy và thay thế thành công ${matchCount} vị trí offset! Đang tạo tệp tải xuống...`;
 
-        // Tải xuống tệp đã xử lý
-        const blob = new Blob([byteArray], { type: 'application/octet-stream' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = originalFileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+                // Tự động tải xuống tệp sau khi xử lý
+                const blob = new Blob([byteArray], { type: 'application/octet-stream' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = originalFileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+            } catch (err) {
+                logBox.innerHTML = `[ERROR]: Lỗi trong quá trình xử lý tự động (${err.message}).`;
+            }
+        }, 300);
     }
 </script>
 
