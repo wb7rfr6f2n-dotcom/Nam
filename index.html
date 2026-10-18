@@ -3,547 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary File Patcher - Smart Web Utility</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: #0d1117;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 414px;
-            height: 100vh;
-            max-height: 896px;
-            background-color: #0b0e14;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-        }
-
-        /* Header */
-        .header {
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #0d111a;
-            border-bottom: 1px solid #161b26;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00e676, #00b0ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .brand-title {
-            font-size: 14px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .free-badge {
-            background-color: #00e676;
-            color: #000;
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            font-size: 10px;
-            color: #6c788a;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-
-        .status-tags {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .status-online {
-            background-color: #12281c;
-            border: 1px solid #00e676;
-            color: #00e676;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .status-online::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background-color: #00e676;
-            border-radius: 50%;
-        }
-
-        .country-flag {
-            background-color: #1c2331;
-            padding: 4px 8px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .page-title {
-            text-align: center;
-            font-size: 18px;
-            font-weight: 700;
-            padding: 10px 0;
-            color: #ffffff;
-            background: #111622;
-            border-bottom: 1px solid #1e2736;
-        }
-
-        /* Nội dung cuộn chính */
-        .content-scroll {
-            flex: 1;
-            overflow-y: auto;
-            padding: 12px 16px 85px 16px;
-            scrollbar-width: none;
-        }
-        .content-scroll::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* Banner hiển thị */
-        .preview-banner {
-            background: radial-gradient(circle at center, #14281c 0%, #101519 100%);
-            border: 1px solid #1a3825;
-            border-radius: 16px;
-            padding: 12px;
-            text-align: center;
-            margin-bottom: 14px;
-        }
-
-        .preview-desc {
-            font-size: 11px;
-            color: #00e676;
-            font-weight: 700;
-            background-color: rgba(0, 230, 118, 0.15);
-            border: 1px solid rgba(0, 230, 118, 0.4);
-            padding: 6px 12px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        /* Khung chọn file */
-        .upload-box {
-            background-color: #121824;
-            border: 1.5px dashed #00e676;
-            border-radius: 12px;
-            padding: 12px;
-            text-align: center;
-            margin-bottom: 14px;
-            cursor: pointer;
-            transition: background 0.2s;
-            display: block;
-        }
-        .upload-box:hover {
-            background-color: #162032;
-        }
-        .upload-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: #00e676;
-            margin-bottom: 4px;
-        }
-        .upload-desc {
-            font-size: 10px;
-            color: #94a3b8;
-        }
-        input[type="file"] {
-            display: none;
-        }
-
-        /* Bảng log trạng thái */
-        .scanner-log-box {
-            background-color: #0d1117;
-            border: 1px solid #1e2736;
-            border-radius: 10px;
-            padding: 10px;
-            margin-bottom: 14px;
-            font-family: monospace;
-            font-size: 11px;
-            color: #00e676;
-            max-height: 110px;
-            overflow-y: auto;
-        }
-
-        /* Danh sách Công Thức / Chức Năng */
-        .section-header {
-            font-size: 13px;
-            font-weight: 700;
-            color: #e2e8f0;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .preset-card {
-            background-color: #141a24;
-            border: 1px solid #1e2736;
-            border-radius: 12px;
-            padding: 12px 14px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .preset-card:active {
-            transform: scale(0.98);
-        }
-
-        .preset-card.active {
-            border: 1.5px solid #00e676;
-            background-color: #12281c;
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
-        }
-
-        .preset-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 9px;
-            background-color: #1d2636;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #00e676;
-            flex-shrink: 0;
-            font-size: 16px;
-        }
-
-        .preset-card.active .preset-icon {
-            background-color: #1b3829;
-            color: #00e676;
-        }
-
-        .preset-info {
-            flex: 1;
-        }
-
-        .preset-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 2px;
-        }
-
-        .preset-sub {
-            font-size: 10px;
-            color: #8a99ad;
-            line-height: 1.2;
-        }
-
-        .check-mark {
-            width: 18px;
-            height: 18px;
-            background-color: #00e676;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .preset-card.active .check-mark {
-            display: flex;
-        }
-
-        /* Nút Build File */
-        .download-btn {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #333, #444);
-            color: #888;
-            border: none;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: not-allowed;
-            margin-top: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .download-btn.active-btn {
-            background: linear-gradient(135deg, #00c853, #00e676);
-            color: #000;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0, 230, 118, 0.3);
-        }
-
-        /* Bottom Navigation Bar */
-        .navbar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            background-color: #0d111a;
-            border-top: 1px solid #161b26;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding-bottom: 6px;
-        }
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3px;
-            color: #526075;
-            font-size: 9px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .nav-item.active {
-            color: #00e676;
-        }
-
-        .nav-item svg {
-            width: 18px;
-            height: 18px;
-            fill: currentColor;
-        }
-    </style>
+    <title>Web Make Định Vị by Oishi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-
-    <div class="app-container">
-        <!-- HEADER -->
-        <div class="header">
-            <div class="user-info">
-                <div class="avatar">🚀</div>
-                <div>
-                    <div class="brand-title">
-                        PATCHER <span class="free-badge">HTML JS</span>
-                    </div>
-                    <div class="subtitle">BINARY UTILITY</div>
-                </div>
-            </div>
-            <div class="status-tags">
-                <div class="status-online">READY</div>
-                <div class="country-flag">🇻🇳 VN</div>
-            </div>
-        </div>
-
-        <div class="page-title">Cache_res (Patcher)</div>
-
-        <!-- MAIN SCROLL CONTENT -->
-        <div class="content-scroll">
-            
-            <div class="preview-banner" style="text-align: center;">
-                <div class="preview-desc" id="bannerDesc">⚡ Chọn chế độ để tự động thay đổi giá trị offset trong tệp</div>
-            </div>
-
-            <!-- KHUNG CHỌN FILE -->
-            <label for="realCacheInput" class="upload-box">
-                <div class="upload-title" id="fileStatusText">📁 Chọn tệp cache gốc (.cache / .dat)</div>
-                <div class="upload-desc">Nạp tệp để thực hiện quét và ghi đè giá trị byte</div>
-            </label>
-            <input type="file" id="realCacheInput" accept="*/*" onchange="loadRealGameCache(event)">
-
-            <!-- KHUNG LOG TRẠNG THÁI -->
-            <div class="scanner-log-box" id="scannerLog">
-                [SYSTEM]: Vui lòng chọn tệp để bắt đầu.
-            </div>
-
-            <!-- SECTION HEADER -->
-            <div class="section-header">
-                <span>✨</span> Chọn Chế Độ Thay Thế Byte
-            </div>
-
-            <!-- LIST PRESETS -->
-            <div id="presetList">
-                
-                <div class="preset-card active" onclick="selectAutoMode(this, '42 4F 4E 45', '42 4F 4E 05', '🎯 Chế độ 1: Thay thế mẫu Bone Neck')">
-                    <div class="preset-icon">🎯</div>
-                    <div class="preset-info">
-                        <div class="preset-title">Preset: Bone Neck Pattern</div>
-                        <div class="preset-sub">Quét và ghi đè giá trị định danh mục tiêu</div>
-                    </div>
-                    <div class="check-mark">✓</div>
-                </div>
-
-                <div class="preset-card" onclick="selectAutoMode(this, '42 4F 4E 45', '42 4F 4E 04', '🎛️ Chế độ 2: Thay thế mẫu Shoulder Pattern')">
-                    <div class="preset-icon">🎛️</div>
-                    <div class="preset-info">
-                        <div class="preset-title">Preset: Shoulder Pattern</div>
-                        <div class="preset-sub">Quét và ghi đè giá trị định danh vùng vai</div>
-                    </div>
-                    <div class="check-mark">✓</div>
-                </div>
-
-            </div>
-
-            <!-- NÚT BUILD FILE -->
-            <button id="buildBtn" class="download-btn" onclick="executeAutoPatch()">⚡ TIẾN HÀNH THAY ĐỔI & XUẤT TỆP</button>
-        </div>
-
-        <!-- BOTTOM NAVIGATION -->
-        <div class="navbar">
-            <div class="nav-item">
-                <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
-                <span>Shader</span>
-            </div>
-            <div class="nav-item active">
-                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-8l1-8z"/></svg>
-                <span>Cache_res</span>
-            </div>
-            <div class="nav-item">
-                <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                <span>Make Avt</span>
-            </div>
-            <div class="nav-item">
-                <svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 21l3.57-.62C9.37 20.73 10.63 21 12 21c4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
-                <span>Sáng Tác</span>
-            </div>
-            <div class="nav-item">
-                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-                <span>Cài Đặt</span>
-            </div>
-        </div>
-    </div>
-
-<script>
-    let rawFileBuffer = null;
-    let originalFileName = "Cache_res.cache";
-    let currentSearchHex = "42 4F 4E 45";
-    let currentReplaceHex = "42 4F 4E 05";
-
-    function loadRealGameCache(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        originalFileName = file.name;
-        document.getElementById('fileStatusText').innerHTML = `✅ Đã nhận: <span style="color:#fff;">${file.name}</span> (${Math.round(file.size/1024)} KB)`;
-        document.getElementById('scannerLog').innerHTML = `[INFO]: Đã nạp thành công "${file.name}" (${file.size} bytes).`;
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            rawFileBuffer = e.target.result;
-            const btn = document.getElementById('buildBtn');
-            btn.classList.add('active-btn');
-            btn.innerText = "⚡ TIẾN HÀNH THAY ĐỔI & XUẤT TỆP";
-        };
-        reader.readAsArrayBuffer(file);
-    }
-
-    function selectAutoMode(element, searchVal, replaceVal, bannerText) {
-        document.querySelectorAll('.preset-card').forEach(card => card.classList.remove('active'));
-        element.classList.add('active');
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans antialiased selection:bg-cyan-500 selection:text-white">
+    <div class="max-w-3xl mx-auto px-4 py-8">
         
-        currentSearchHex = searchVal;
-        currentReplaceHex = replaceVal;
-        document.getElementById('bannerDesc').innerText = bannerText;
-    }
+        <!-- Header Banner -->
+        <div class="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border border-cyan-500/30 rounded-2xl p-6 mb-6 text-center shadow-lg shadow-cyan-950/50">
+            <div class="text-4xl mb-2 animate-bounce">👑</div>
+            <h1 class="text-2xl md:text-3xl font-extrabold tracking-wide text-cyan-400 uppercase mb-2">
+                web make định vị by <span class="text-white">oishi</span>
+            </h1>
+            <p class="text-slate-300 text-sm md:text-base">
+                Chào mừng bạn đã quay trở lại với hệ thống make định vị của tôi. Mọi thứ đã sẵn sàng để sử dụng!
+            </p>
+        </div>
 
-    function parseHex(str) {
-        let clean = str.replace(/\s+/g, '');
-        if (clean.length % 2 !== 0) clean = '0' + clean;
-        let arr = new Uint8Array(clean.length / 2);
-        for (let i = 0; i < clean.length; i += 2) {
-            arr[i / 2] = parseInt(clean.substr(i, 2), 16);
-        }
-        return arr;
-    }
+        <!-- Main Content Box -->
+        <div class="space-y-6">
 
-    function executeAutoPatch() {
-        if (!rawFileBuffer) {
-            alert("Vui lòng chọn tệp trước!");
-            return;
-        }
+            <!-- File Selector -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-cyan-500/50 transition cursor-pointer">
+                <label for="fileInput" class="block cursor-pointer">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="font-bold text-cyan-400 text-lg mb-1"><i class="fa-solid fa-folder-open mr-2"></i>Bấm để chọn file bundle</div>
+                            <div class="text-xs text-slate-400 font-mono bg-slate-950 px-2.5 py-1 rounded inline-block border border-slate-800">
+                                assetindexer / shaders / optionalavatarres_commonab_shader
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-500"></i>
+                    </div>
+                </label>
+                <input type="file" id="fileInput" class="hidden">
+            </div>
 
-        let logBox = document.getElementById('scannerLog');
-        logBox.innerHTML = `[PROCESSING]: Đang quét và thay thế giá trị trong tệp...`;
+            <!-- Music Player -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <h2 class="text-base font-bold text-slate-200 mb-3 flex items-center">
+                    <i class="fa-solid fa-music text-cyan-400 mr-2"></i>Trình phát nhạc nền
+                </h2>
+                <div class="flex flex-col sm:flex-row gap-3 items-center">
+                    <select id="playlistSelect" class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-300 focus:outline-none focus:border-cyan-500">
+                        <option value="">-- Đang tải danh sách từ Google Sheets... --</option>
+                    </select>
+                </div>
+                <audio id="bgAudio" loop class="hidden"></audio>
+            </div>
 
-        setTimeout(() => {
-            let byteArray = new Uint8Array(rawFileBuffer.slice(0));
+            <!-- Preset 3 Details -->
+            <details class="bg-slate-900 border border-slate-800 rounded-xl p-5 group">
+                <summary class="font-bold text-cyan-400 cursor-pointer list-none flex items-center justify-between">
+                    <span class="flex items-center"><i class="fa-solid fa-sliders mr-2"></i>Màu preset 3</span>
+                    <i class="fa-solid fa-angle-down group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 space-y-3 text-sm text-slate-300 border-t border-slate-800 pt-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="bg-slate-950 p-3 rounded border border-slate-800">Cấu hình màu 1</div>
+                        <div class="bg-slate-950 p-3 rounded border border-slate-800">Cấu hình màu 2</div>
+                        <div class="bg-slate-950 p-3 rounded border border-slate-800">Cấu hình màu 3</div>
+                    </div>
+                    <div class="text-xs text-slate-400 bg-slate-950 p-3 rounded border border-slate-800 leading-relaxed">
+                        Màu ghi vào shader dưới dạng 4 số thực RGBA (16 byte tại chỗ) — kích thước file không đổi. Đây là <code>m_DefValue</code>, giá trị mặc định của shader.
+                    </div>
+                </div>
+            </details>
 
-            try {
-                let searchBytes = parseHex(currentSearchHex);
-                let replaceBytes = parseHex(currentReplaceHex);
+            <!-- Preset 4 Details -->
+            <details class="bg-slate-900 border border-slate-800 rounded-xl p-5 group">
+                <summary class="font-bold text-cyan-400 cursor-pointer list-none flex items-center justify-between">
+                    <span class="flex items-center"><i class="fa-solid fa-wand-magic-sparkles mr-2"></i>Màu preset 4</span>
+                    <i class="fa-solid fa-angle-down group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 space-y-3 text-sm text-slate-300 border-t border-slate-800 pt-3">
+                    <div class="text-xs text-slate-300 bg-slate-950 p-3 rounded border border-slate-800 leading-relaxed space-y-2">
+                        <p><b>Xuyên tường</b> đặt <code>zTest = 8 (Always)</code> trong render state — đây mới là thứ làm nhân vật hiện qua vật cản, màu sắc chỉ quyết định trông ra sao. Bỏ tick trả về <code>4 (LEqual)</code>, nhân vật bị tường che như bình thường.</p>
+                        <p>Hai hiệu ứng còn lại: bỏ tick cả hai = đúng công thức bản mod đang chạy (thân đặc, dễ nhìn địch). Tick vào bật hiệu ứng hologram gốc — có đường kẻ cắt ngang người. Muốn thấy dải quét thì đặt <b>màu quét</b> khác đen.</p>
+                    </div>
+                    <div class="text-xs text-slate-400 bg-slate-950 p-3 rounded border border-slate-800 leading-relaxed">
+                        <b>Khác với định vị súng:</b> <code>hologram</code> chỉ có 1 pass và không có tham số bề dày. <code>_RimColor</code> là <i>fresnel rim</i> — sáng dần ở mép cơ thể theo góc nhìn, không phải đường viền nét như <code>_OutLineWidth</code> của preset 3 (shader đó có pass riêng phóng to mô hình để vẽ viền). Muốn thấy rõ sáng mép thì hạ <b>độ đục nhân vật</b> xuống, nếu không màu nền sẽ lấn át.
+                    </div>
+                </div>
+            </details>
 
-                let matchCount = 0;
-                for (let i = 0; i <= byteArray.length - searchBytes.length; i++) {
-                    let found = true;
-                    for (let j = 0; j < searchBytes.length; j++) {
-                        if (byteArray[i + j] !== searchBytes[j]) {
-                            found = false;
-                            break;
-                        }
-                    }
-                    if (found) {
-                        for (let j = 0; j < replaceBytes.length; j++) {
-                            byteArray[i + j] = replaceBytes[j];
-                        }
-                        matchCount++;
-                        i += searchBytes.length - 1;
-                    }
-                }
+            <!-- Tinh chỉnh preset 2 -->
+            <details class="bg-slate-900 border border-slate-800 rounded-xl p-5 group">
+                <summary class="font-bold text-cyan-400 cursor-pointer list-none flex items-center justify-between">
+                    <span class="flex items-center"><i class="fa-solid fa-gear mr-2"></i>Tinh chỉnh preset 2</span>
+                    <i class="fa-solid fa-angle-down group-open:rotate-180 transition-transform"></i>
+                </summary>
+                <div class="mt-4 space-y-3 text-sm text-slate-300 border-t border-slate-800 pt-3">
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+                        <div class="bg-slate-950 p-2 text-center rounded border border-slate-800">Trục X</div>
+                        <div class="bg-slate-950 p-2 text-center rounded border border-slate-800">Trục Y</div>
+                        <div class="bg-slate-950 p-2 text-center rounded border border-slate-800">Trục Z</div>
+                        <div class="bg-slate-950 p-2 text-center rounded border border-slate-800">Scale</div>
+                    </div>
+                    <div class="text-xs text-slate-400 bg-slate-950 p-3 rounded border border-slate-800">
+                        Trục cục bộ: <code>x</code> âm hơn = cao hơn, <code>z</code> = trái/phải, <code>y</code> = trước/sau. Scale ghi vào là <code>(−s, +s, 1.0)</code>.
+                    </div>
+                </div>
+            </details>
 
-                logBox.innerHTML = `[SUCCESS]: Đã thay thế thành công ${matchCount} vị trí byte trong tệp. Đang tải xuống...`;
+            <!-- Hướng dẫn sử dụng -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5">
+                <h2 class="text-base font-bold text-slate-200 mb-4 flex items-center">
+                    <i class="fa-solid fa-book-open text-cyan-400 mr-2"></i>Hướng dẫn sử dụng
+                </h2>
+                <ul class="space-y-4 text-sm text-slate-300">
+                    <li class="flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-6 h-6 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center font-bold text-xs border border-cyan-500/30">1</span>
+                        <div>
+                            <strong class="text-white block mb-0.5">Lấy file bundle từ game</strong>
+                            <span class="text-xs text-slate-400">Dùng app quản lý file vào thư mục cài đặt Free Fire, Free Fire Max → <code>assets/bin/Data/</code>. File cần tìm: <code>assetindexer</code>, <code>shaders</code> hoặc <code>optionalavatarres_commonab_shader</code>.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-6 h-6 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center font-bold text-xs border border-cyan-500/30">2</span>
+                        <div>
+                            <strong class="text-white block mb-0.5">Bấm vào ô chọn file bên trên</strong>
+                            <span class="text-xs text-slate-400">Chọn file bundle từ Files app. Tool sẽ tự nhận diện loại file và chỉ bật những preset phù hợp.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-6 h-6 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center font-bold text-xs border border-cyan-500/30">3</span>
+                        <div>
+                            <strong class="text-white block mb-0.5">Bấm Tạo file</strong>
+                            <span class="text-xs text-slate-400">Chỉnh màu sắc hoặc giữ mặc định rồi bấm Tạo file.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <span class="flex-shrink-0 w-6 h-6 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center font-bold text-xs border border-cyan-500/30">4</span>
+                        <div>
+                            <strong class="text-white block mb-0.5">Bấm Tải file đã sửa → lưu vào Files</strong>
+                            <span class="text-xs text-slate-400">Chép đè file đã sửa lên file gốc trong game (cùng tên, cùng vị trí).</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
 
-                const blob = new Blob([byteArray], { type: 'application/octet-stream' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = originalFileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+        </div>
 
-            } catch (err) {
-                logBox.innerHTML = `[ERROR]: ${err.message}`;
-            }
-        }, 200);
-    }
-</script>
+        <!-- Footer -->
+        <div class="mt-8 text-center text-xs text-slate-500">
+            © 2026 Oishi. All rights reserved.
+        </div>
 
+    </div>
 </body>
 </html>
