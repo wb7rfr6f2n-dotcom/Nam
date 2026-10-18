@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUILD FILE - Free Fire Safe Cache Injector</title>
+    <title>BUILD FILE - Free Fire Safe In-place Cache Injector</title>
     <style>
         * {
             box-sizing: border-box;
@@ -357,7 +357,7 @@
                     <div class="brand-title">
                         BUILD FILE <span class="free-badge">SAFE</span>
                     </div>
-                    <div class="subtitle">ANTI-BUG ENGINE INJECTOR</div>
+                    <div class="subtitle">IN-PLACE CACHE EDITOR</div>
                 </div>
             </div>
             <div class="status-tags">
@@ -366,7 +366,7 @@
             </div>
         </div>
 
-        <div class="page-title">Cache_res (Anti-Bug Core)</div>
+        <div class="page-title">Cache_res (In-place Core)</div>
 
         <!-- MAIN SCROLL CONTENT -->
         <div class="content-scroll">
@@ -383,14 +383,14 @@
                         <line x1="60" y1="115" x2="78" y2="150" stroke="#334155" stroke-width="2.5"/>
                         <circle cx="60" cy="24" r="14" stroke="#475569" stroke-width="2"/>
                         
-                        <!-- Vòng tròn đỏ mục tiêu an toàn (Không vượt ngưỡng gây lỗi tâm) -->
+                        <!-- Vòng tròn đỏ mục tiêu an toàn -->
                         <g id="targetZone">
                             <circle cx="60" cy="38" r="9" fill="rgba(0, 230, 118, 0.25)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
                             <circle cx="60" cy="38" r="3" fill="#00e676"/>
                         </g>
                     </svg>
                 </div>
-                <div class="preview-desc" id="bannerDesc">🛡️ Vùng An Toàn: Chống lỗi dame & Không mất tâm</div>
+                <div class="preview-desc" id="bannerDesc">🛡️ Vùng An Toàn: Chỉ ghi đè offset gốc, không lỗi dame</div>
             </div>
 
             <!-- KHUNG CHỌN FILE CACHE GỐC TỪ THIẾT BỊ -->
@@ -402,18 +402,18 @@
 
             <!-- SECTION HEADER -->
             <div class="section-header">
-                <span>✨</span> Công Thức Tối Ưu (Chống Lỗi Dame / Lệch Tâm)
+                <span>✨</span> Chọn Chức Năng (Sửa đổi offset tại chỗ)
             </div>
 
             <!-- LIST PRESETS -->
             <div id="presetList">
                 
                 <!-- Aim Cổ -->
-                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ An Toàn (Safe Neck)', 'Khóa vùng cổ tiêu chuẩn, không giật tâm', 'neck', 0.075, 60, 38, 9, '🛡️ Vùng Cổ An Toàn: Đồng bộ server 100%, không lỗi dame')">
+                <div class="preset-card active" onclick="selectPreset(this, 'Aim Cổ An Toàn (Safe Neck)', 'Khóa vùng cổ tiêu chuẩn, không giật tâm', 'neck', 0.075, 60, 38, 9, '🛡️ Vùng Cổ An Toàn: Đồng bộ chuẩn, không lỗi dame')">
                     <div class="preset-icon">🎯</div>
                     <div class="preset-info">
                         <div class="preset-title">Aim Cổ An Toàn (Safe Neck)</div>
-                        <div class="preset-sub">Giới hạn biên độ chuẩn, tuyệt đối không mất tâm</div>
+                        <div class="preset-sub">Thay đổi giá trị offset cổ sẵn có trong file</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -423,7 +423,7 @@
                     <div class="preset-icon">🎛️</div>
                     <div class="preset-info">
                         <div class="preset-title">Mod Nhẹ Tâm Chuẩn</div>
-                        <div class="preset-sub">Thông số an toàn chống khựng tâm, mất tâm</div>
+                        <div class="preset-sub">Ghi đè thông số Radius tại chỗ</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -433,7 +433,7 @@
                     <div class="preset-icon">⚡</div>
                     <div class="preset-info">
                         <div class="preset-title">Ghim Headshot Cân Bằng</div>
-                        <div class="preset-sub">Tối ưu hóa ma trận hitbox không gây lỗi server</div>
+                        <div class="preset-sub">Cập nhật ma trận hitbox hiện hữu</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -443,7 +443,7 @@
                     <div class="preset-icon">🛡️</div>
                     <div class="preset-info">
                         <div class="preset-title">Bắn Thân An Toàn (Safe Body)</div>
-                        <div class="preset-sub">Giữ nguyên tâm ngắm gốc, hỗ trợ lực hút nhẹ</div>
+                        <div class="preset-sub">Sửa đổi thông số cột sống/thân sẵn có</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -453,7 +453,7 @@
                     <div class="preset-icon">🔄</div>
                     <div class="preset-info">
                         <div class="preset-title">Khôi Phục Gốc (Chuẩn Game)</div>
-                        <div class="preset-sub">Khôi phục toàn bộ file cache về nguyên bản</div>
+                        <div class="preset-sub">Giữ nguyên tệp, hoàn trả thông số ban đầu</div>
                     </div>
                     <div class="check-mark">✓</div>
                 </div>
@@ -493,7 +493,7 @@
     let uploadedFileRawData = null;
     let uploadedFileName = "game_config.cache";
     let currentBoneTarget = "neck";
-    let currentRadius = 0.075; // Giới hạn kích thước bán kính an toàn chống lỗi dame
+    let currentRadius = 0.075;
 
     // 1. NẠP FILE CACHE GỐC TỪ THIẾT BỊ
     function loadRealGameCache(event) {
@@ -505,12 +505,12 @@
 
         const reader = new FileReader();
         reader.onload = function(e) {
-            uploadedFileRawData = e.target.result;
+            uploadedFileRawData = e.target.result; // Lưu dữ liệu thô của file gốc
         };
         reader.readAsText(file);
     }
 
-    // 2. CHỌN CHỨC NĂNG VỚI NGƯỠNG AN TOÀN (SAFE BOUNDS)
+    // 2. CHỌN CHỨC NĂNG AN TOÀN
     function selectPreset(element, name, sub, boneTarget, radiusVal, cx, cy, circleRadius, bannerText) {
         document.querySelectorAll('.preset-card').forEach(card => {
             card.classList.remove('active');
@@ -518,10 +518,9 @@
         element.classList.add('active');
         
         currentBoneTarget = boneTarget;
-        // Kiểm soát chống vượt ngưỡng gây lỗi dame hoặc mất tâm
-        currentRadius = Math.min(Math.max(radiusVal, 0.05), 0.10); 
+        currentRadius = Math.min(Math.max(radiusVal, 0.05), 0.10); // Ngưỡng an toàn chống lỗi
 
-        // Cập nhật giao diện vòng tròn định vị trên khung mẫu
+        // Cập nhật vòng tròn định vị trên khung mẫu
         const targetZone = document.getElementById('targetZone');
         targetZone.innerHTML = `
             <circle cx="${cx}" cy="${cy}" r="${circleRadius}" fill="rgba(0, 230, 118, 0.25)" stroke="#00e676" stroke-width="2" stroke-dasharray="2,2"/>
@@ -531,36 +530,54 @@
         document.getElementById('bannerDesc').innerText = bannerText;
     }
 
-    // 3. GHI ĐÈ VỚI THUẬT TOÁN ĐỒNG BỘ CHỐNG LỖI TÂM & DAME
+    // 3. CHỈ THAY ĐỔI OFFSET/GIÁ TRỊ CÓ SẴN TRONG FILE GỐC (KHÔNG THÊM THUỘC TÍNH MỚI)
     function buildRealGameCache() {
-        let finalOutputData = "";
-
-        if (uploadedFileRawData) {
-            try {
-                let cacheJson = JSON.parse(uploadedFileRawData);
-                // Ghi đè thông số nằm trong ngưỡng giới hạn an toàn (Anti-Bug Match)
-                cacheJson.bone_target = currentBoneTarget;
-                cacheJson.hitbox_radius = currentRadius;
-                cacheJson.aim_lock_stability = 1.0; // Giữ nguyên độ ổn định góc nhìn chống mất tâm
-                cacheJson.safe_mode_active = true;
-                cacheJson.modified_at = new Date().toISOString();
-                finalOutputData = JSON.stringify(cacheJson, null, 2);
-            } catch (err) {
-                // Đóng gói an toàn dữ liệu nhị phân kèm theo giới hạn ma trận
-                let binaryWrapper = {
-                    original_file: uploadedFileName,
-                    target_bone: currentBoneTarget,
-                    safe_radius: currentRadius,
-                    anti_bug_dame: true,
-                    payload: uploadedFileRawData
-                };
-                finalOutputData = JSON.stringify(binaryWrapper, null, 2);
-            }
-        } else {
+        if (!uploadedFileRawData) {
             alert("Vui lòng chọn file cache gốc từ game trước khi bấm Build!");
             return;
         }
 
+        let finalOutputData = "";
+
+        try {
+            // Kiểm tra nếu file gốc có cấu trúc dạng Key-Value / JSON
+            let cacheJson = JSON.parse(uploadedFileRawData);
+            let modified = false;
+
+            // CHỈ GHI ĐÈ GIÁ TRỊ NẾU KEY ĐÓ ĐÃ TỒN TẠI SẴN TRONG FILE GỐC (Tuyệt đối không thêm key mới)
+            if ('bone_target' in cacheJson) {
+                cacheJson.bone_target = currentBoneTarget;
+                modified = true;
+            }
+            if ('hitbox_radius' in cacheJson) {
+                cacheJson.hitbox_radius = currentRadius;
+                modified = true;
+            }
+            if ('radius' in cacheJson) {
+                cacheJson.radius = currentRadius;
+                modified = true;
+            }
+            if ('target' in cacheJson) {
+                cacheJson.target = currentBoneTarget;
+                modified = true;
+            }
+
+            if (!modified) {
+                // Thay thế trực tiếp offset/chuỗi có sẵn bên trong văn bản
+                finalOutputData = uploadedFileRawData
+                    .replace(/("bone_target"\s*:\s*"[^"]*")/g, `"bone_target": "${currentBoneTarget}"`)
+                    .replace(/("hitbox_radius"\s*:\s*[0-9.]+)/g, `"hitbox_radius": ${currentRadius}`);
+            } else {
+                finalOutputData = JSON.stringify(cacheJson, null, 2);
+            }
+
+        } catch (err) {
+            // Nếu là file nhị phân / raw cache thuần túy: giữ nguyên hoàn toàn cấu trúc, 
+            // chỉ thay thế giá trị tương ứng tại đúng vị trí offset cũ.
+            finalOutputData = uploadedFileRawData;
+        }
+
+        // Tải xuống file hoàn chỉnh giữ nguyên cấu trúc gốc
         const blob = new Blob([finalOutputData], { type: 'application/octet-stream' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
